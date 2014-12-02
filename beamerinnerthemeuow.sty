@@ -1,31 +1,34 @@
 \mode<presentation>
 
 \setbeamertemplate{background}{
-    \begin{tikzpicture}
-        \fill[color=white] (0,0) rectangle (\the\paperwidth,\the\paperheight);
-        \filldraw[fill=UOWblue,draw=UOWblue] (0,0) rectangle  node[ align=left] {\scriptsize\textcolor{white}{VISIONARY / PASSIONATE / DYNAMIC}\\[0.2ex]\scriptsize CONNECT: UOW} (0.287\paperwidth,0.125\paperheight);
-        \filldraw[fill=UOWblue,draw=UOWblue] (0.287\paperwidth,0) rectangle node[anchor=south west] {\includegraphics[width=0.2\paperwidth]{uow_white.png}} (\the\paperwidth,0.168\paperheight) ;
+   \begin{tikzpicture}
+      % majority of slide is white (could make an otion to give a very light gray)
+      \fill[color=white] (0,0) rectangle (\the\paperwidth,\the\paperheight);  
+      % leftmost rectangle of staggered thingy
+      \filldraw[fill=UOWblue,draw=UOWblue] (0,0) rectangle         (0.287\paperwidth,0.125\paperheight); 
+      % rightmost rectangle of staggered thingy
+      \filldraw[fill=UOWblue,draw=UOWblue] (0.287\paperwidth,0) rectangle node[anchor=south west] {\includegraphics[width=0.2\paperwidth]{uow_white.png}} (\the\paperwidth,0.168\paperheight) ;
 
     \end{tikzpicture}
 }
 
 % Title page
-\defbeamertemplate*{title page}{uow}[1][]
-{ 
-   \vskip6cm%
-    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,sep=8pt,#1]{title page header}
-      \usebeamerfont{title}\inserttitle\par%
-    \end{beamercolorbox}%
-    \vskip0.75cm%
-    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{author}
-      \usebeamerfont{author}\insertauthor%
-    \end{beamercolorbox}
-     \vskip0.2cm%
-    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{date}
-      \usebeamerfont{author}\insertdate%
-    \end{beamercolorbox}
-  \vfill
-}
+%\defbeamertemplate*{title page}{uow}[1][]{}
+%{ 
+%   \vskip6cm%
+%    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,sep=8pt,#1]{title page header}
+%      \usebeamerfont{title}\inserttitle\par%
+%    \end{beamercolorbox}%
+%    \vskip0.75cm%
+%    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{author}
+%      \usebeamerfont{author}\insertauthor%
+%    \end{beamercolorbox}
+%     \vskip0.2cm%
+%    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{date}
+%      \usebeamerfont{author}\insertdate%
+%    \end{beamercolorbox}
+%  \vfill
+%}
 
 % Items
 \setbeamertemplate{items}[square]
