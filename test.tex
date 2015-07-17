@@ -1,37 +1,36 @@
-\documentclass{beamer}
+\documentclass[aspectratio=43,10pt,handout]{beamer}
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\title{There Is No Largest Prime Number}
-\date[ISPN ’80]{27th International Symposium of Prime Numbers}
-\author[Euclid]{Euclid of Alexandria \texttt{euclid@alexandria.edu}}
-\logo{\includegraphics[height=1cm]{UOW_logo_white.png}}
-\usetheme{uow}
+%\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usepackage{xcolor}
+%\title{There Is No Largest Prime Number}
+%\date[ISPN ’80]{27th International Symposium of Prime Numbers}
+%\author[Euclid]{Euclid of Alexandria \texttt{euclid@alexandria.edu}}
+%\logo{\includegraphics[height=1cm]{UOW_logo_white.png}}
+
+\useinnertheme{uow}
 
 \begin{document}
-
-\begin{frame}
-\titlepage
-\end{frame}
-
-begin{frame} 
+\begin{frame} 
 \frametitle{There Is No Largest Prime Number} 
-\framesubtitle{The proof uses \textit{reductio ad absurdum}.} 
 \begin{theorem}
-There is no largest prime number. \end{theorem} 
+There is no largest prime number. 
+\end{theorem} 
 \begin{enumerate} 
-\item<1-| alert@1> Suppose $p$ were the largest prime number. 
-\item<2-> Let $q$ be the product of the first $p$ numbers. 
-\item<3-> Then $q+1$ is not divisible by any of them. 
-\item<1-> But $q + 1$ is greater than $1$, thus divisible by some prime
+\item Suppose $p$ were the largest prime number. 
+\item Let $q$ be the product of the first $p$ numbers. 
+\item Then $q+1$ is not divisible by any of them. 
+\item But $q + 1$ is greater than $1$, thus divisible by some prime
 number not in the first $p$ numbers.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{A longer title}
-\begin{itemize}
-\item one
-\item two
-\end{itemize}
+\begin{frame}[t]
+%   \begin{tikzpicture}[overlay]
+%      \draw[bg, fill=red] (0,0) rectangle (\paperwidth, 0.4);
+%      \draw[fg, fill=blue] (1cm,0) rectangle (0.5\paperwidth, 0.4);
+%      \fill[color=black] (1cm,-1cm) circle (2pt);
+%   \end{tikzpicture}
 \end{frame}
 
 \end{document}

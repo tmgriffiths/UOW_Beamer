@@ -1,40 +1,23 @@
 \mode<presentation>
-
-\setbeamertemplate{background}{
-    \begin{tikzpicture}
-    \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
-    \fill[color=brown] (0,2) rectangle(\the\paperwidth,\the\paperheight);
-    \fill[color=UOWblue] (0,0) rectangle(0.3\the\paperwidth,0.125\the\paperheight);
-    \fill[color=UOWblue] (0.3\the\paperwidth,0) rectangle(0.7\the\paperwidth,0.16\the\paperheight);
-    \node (connect) at (0,\the\paperheight)
-    
-    \ifnum\thepage>1\relax%
-        \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
-    \fi
-    \end{tikzpicture}
+\definecolor{UOWdarkblue}{rgb}{0.14117, 0.32549, 0.59216}   % Use the UOW colour pallet
+\setbeamertemplate{background}{%
+   \begin{tikzpicture}[overlay]
+      \fill[UOWdarkblue] (0,-0.9375*\the\paperheight) 
+         rectangle (\the\paperwidth, -\the\paperheight);
+      
+      %\fill[UOWdarkblue,] (0.7*\the\paperwidth,-0.875*\the\paperheight) 
+      %   rectangle (\the\paperwidth, -\the\paperheight);
+      %\node[anchor=east, xshift=-0.05*\the\paperwidth] at (rectangle.centre)%(\the\paperwidth,-0.9375*\the\paperheight)
+      %{\includegraphics[width=0.2\paperwidth]{UOW_logo_white.png}};
+      
+      \node[anchor=south east, fill=UOWdarkblue, rectangle, inner sep=3mm]
+          at (\the\paperwidth,-\the\paperheight)
+          {\includegraphics[width=0.149606\paperwidth]{UOW_mono_inverted.pdf}}; 
+          %1.13cm x 3.8cm in pptx % 0.2\paperwidth
+          % pagewidth = 25.4cm pageheight = 14.3cm
+          % logo = 3.8/25.4 pagewidth wide
+          
+   \end{tikzpicture}
 }
 
-% Title page
-\defbeamertemplate*{title page}{uow}[1][]
-{ 
-   \vskip6cm%
-    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,sep=8pt,#1]{title page header}
-      \usebeamerfont{title}\inserttitle\par%
-    \end{beamercolorbox}%
-    \vskip0.75cm%
-    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{author}
-      \usebeamerfont{author}\insertauthor%
-    \end{beamercolorbox}
-     \vskip0.2cm%
-    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{date}
-      \usebeamerfont{author}\insertdate%
-    \end{beamercolorbox}
-  \vfill
-}
-
-% Items
-\setbeamertemplate{items}[square]
-\setbeamertemplate{sections/subsections in toc}[square]
-
-\mode
-<all>
+\mode<all>
