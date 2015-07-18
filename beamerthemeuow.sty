@@ -1,23 +1,54 @@
-\mode<presentation>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeuow}
+   [2015/07/18 A Beamer Theme That Matches the UOW Branding Guidelines]
 
-% Requirement
+% Required packages
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
-% Colour Definitions from Berwyck Poad. Thanks Bezza.
-\definecolor{UOWblue}{rgb}{0.14117, 0.32549, 0.59216}   % Use the UOW colour pallet
-\definecolor{UOWyellow}{rgb}{0.92549, 0.71767, 0.19216}
-\definecolor{UOWred}{rgb}{0.81176, 0.262745, 0.21961}
-\definecolor{secinhead}{rgb}{0.92549, 0.71767, 0.19216}	% More colour definitions (for section head and 	
-\definecolor{titlebg}{rgb}{0.14117, 0.32549, 0.59216}		% title backgrounds)
-\setbeamertemplate{items}[circle]						% use circles for bullet points
-%\setbeamertemplate{navigation symbols}{} %no nav symbols
+\RequirePackage{xparse}
+\RequirePackage{etex}
+\RequirePackage{etoolbox}
+\RequirePackage{pgfopts}
+\RequirePackage{ifxetex}
+\RequirePackage{ifluatex}
+
+% Define a macro for the user to set options in the theme (just a color or mono at this stage).
+\newcommand{\UOWthemeset}[1]{\pgfkeys{/UOWtheme/.cd,#1}}
+
+% UOWthem/themecolour is equivalent to UOWthem/*/themecolour from the sub-packages.
+\pgfkeys{/UOWtheme/.cd,
+   .search also={
+      /UOWtheme/inner,
+      /UOWtheme/outer,
+      /UOWtheme/color,
+   },
+% Alias themecolour to themecolor
+   /UOWtheme/themecolour/.style={
+      UOWtheme/themecolor=#1
+   },
+% Forward keys that affect sub-packages manually.
+   themecolour/.code=\pgfkeysalso{
+      color/themecolor=#1,
+   },
+}
+
+% Set default values for options.
+\newcommand{\@UOWtheme@defaults}{
+   \pgfkeys{/UOWtheme/.cd,
+      themecolor=darkblue,
+   }
+}
 
 % Settings
-\useinnertheme{uow}
-%\useoutertheme{uow}
 \usecolortheme{uow}
+\useinnertheme{uow}
+\useoutertheme{uow}
 
+\@UOWtheme@defaults
+\ProcessPgfOptions{/UOWtheme}
+
+% use circles for bullet points
+%\setbeamertemplate{items}[circle]
+% No naigation symbols in the bottom corner
 \setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{blocks}[rounded][shadow=true]  
-
-\mode<all>
+\setbeamertemplate{blocks}[rounded][shadow=false]  

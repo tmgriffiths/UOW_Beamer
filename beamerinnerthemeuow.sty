@@ -1,23 +1,61 @@
-\mode<presentation>
-\definecolor{UOWdarkblue}{rgb}{0.14117, 0.32549, 0.59216}   % Use the UOW colour pallet
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeuow}
+   [2015/07/18 A Beamer Inner Theme That Matches the UOW Branding Guidelines]
+
+\RequirePackage{pgfopts}
+\RequirePackage{tikz}
+\RequirePackage{calc}
+\RequirePackage{xparse}
+
+% See answer to http://tex.stackexchange.com/questions/123106/detect-aspect-ratio-in-beamer
+\ExplSyntaxOn
+\NewDocumentCommand{\ifaspectratio}{mmm}{%
+   % Recover the option from those passed to the class
+   \keys_set:nf { zunbeltz/beameroptions } { \use:c { opt@beamer.cls } }
+   \str_if_eq:nVTF { #1 } \l_zunbeltz_aspectratio_tl { #2 } { #3 }
+}
+\NewDocumentCommand{\xifaspectratio}{mO{}}{%
+   % Recover the option from those passed to the class
+   \keys_set:nf { zunbeltz/beameroptions } { \use:c { opt@beamer.cls } }
+   \str_case:Vnn \l_zunbeltz_aspectratio_tl { #1 } { #2 }
+}
+% We need to define only one key, the other are treated as `unknown'
+\keys_define:nn { zunbeltz/beameroptions }{%
+   aspectratio .tl_set:N = \l_zunbeltz_aspectratio_tl,
+   aspectratio .initial:n = 43,
+   unknown .code:n = {},
+}
+
+% Generate the variants we need
+\cs_generate_variant:Nn \keys_set:nn { nf }
+\cs_generate_variant:Nn \str_if_eq:nnTF { nV }
+\cs_generate_variant:Nn \str_case:nnn { V }
+\ExplSyntaxOff
+
+\newlength{\@UOWlargerectangle@height}
+\setlength{\@UOWlargerectangle@height}{0.125\paperheight}
+\newlength{\@UOWlargerectangle@width}
+\setlength{\@UOWlargerectangle@width}{0.189\paperwidth}
+\newlength{\@UOWsmallrectangle@height}
+\setlength{\@UOWsmallrectangle@height}{0.07\paperheight}
+\newlength{\@UOWthinrectangle@width}
+\setlength{\@UOWthinrectangle@width}{\paperwidth-0.189\paperwidth}
+\newlength{\@UOWlogo@width}
+\setlength{\@UOWlogo@width}{0.149606\paperwidth}
+
 \setbeamertemplate{background}{%
    \begin{tikzpicture}[overlay]
-      \fill[UOWdarkblue] (0,-0.9375*\the\paperheight) 
-         rectangle (\the\paperwidth, -\the\paperheight);
-      
-      %\fill[UOWdarkblue,] (0.7*\the\paperwidth,-0.875*\the\paperheight) 
-      %   rectangle (\the\paperwidth, -\the\paperheight);
-      %\node[anchor=east, xshift=-0.05*\the\paperwidth] at (rectangle.centre)%(\the\paperwidth,-0.9375*\the\paperheight)
-      %{\includegraphics[width=0.2\paperwidth]{UOW_logo_white.png}};
-      
-      \node[anchor=south east, fill=UOWdarkblue, rectangle, inner sep=3mm]
-          at (\the\paperwidth,-\the\paperheight)
-          {\includegraphics[width=0.149606\paperwidth]{UOW_mono_inverted.pdf}}; 
-          %1.13cm x 3.8cm in pptx % 0.2\paperwidth
-          % pagewidth = 25.4cm pageheight = 14.3cm
-          % logo = 3.8/25.4 pagewidth wide
-          
+      \filldraw[color=\@UOWtheme@color,]
+         (0,-\the\paperheight+\@UOWsmallrectangle@height) 
+         rectangle (\@UOWthinrectangle@width, -\the\paperheight);
+      \filldraw[color=\@UOWtheme@color,]
+         (\@UOWthinrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+         rectangle (\the\paperwidth, -\the\paperheight)
+         [path picture={
+         \node at (path picture bounding box.center) {
+         \includegraphics[width=\@UOWlogo@width]{UOW_mono_inverted.pdf}
+         };}
+         ];
    \end{tikzpicture}
 }
 
-\mode<all>

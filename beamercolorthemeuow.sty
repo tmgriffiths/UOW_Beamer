@@ -1,11 +1,88 @@
-\mode<presentation>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeuow}
+   [2015/07/18 A Beamer Colour Theme That Matches the UOW Branding Guidelines]
 
-% Settings
+\RequirePackage{pgfopts}
+\RequirePackage{xcolor}
+   % Use the UOW colour pallet
+   \definecolor{UOWblack}{RGB}{0, 0, 0}
+   \definecolor{UOWgold}{RGB}{253, 184, 19}
+   \definecolor{UOWdarkblue}{RGB}{0, 83, 154}
+   \definecolor{UOWred}{RGB}{238, 64, 52}
+   \definecolor{UOWblue}{RGB}{0, 149, 214}
+   \definecolor{UOWdarkgreen}{RGB}{0, 146, 94}
+   \definecolor{UOWlimegreen}{RGB}{183, 198, 38}
+   \definecolor{UOWorange}{RGB}{243, 121, 32}
+   \definecolor{UOWdarkred}{RGB}{195, 18, 48}
+   \definecolor{UOWpink}{RGB}{238 ,0, 139}
+   \definecolor{UOWpurple}{RGB}{74, 47, 142}
+   \definecolor{UOWgrey}{RGB}{69, 85, 95}
+
+\newcommand*{\@UOWtheme@color}{}
+\pgfkeys{
+   /UOWtheme/color/themecolor/.cd,
+      .is choice,
+      mono/.code={%
+        %\renewcommand*{\@UOWtheme@color}{\
+      },
+      black/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWblack}
+      },
+      gold/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWgold}
+      },
+      yellow/.code={%
+         \pgfkeysalso{themecolor=gold}
+      },
+      darkblue/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWdarkblue}
+      },
+      red/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWred}
+      },
+      blue/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWblue}
+      },
+      darkgreen/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWdarkgreen}
+      },
+      green/.code={%
+         \pgfkeysalso{themecolor=darkgreen}
+      },
+      limegreen/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWlimegreen}
+      },
+      orange/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWorange}
+      },
+      darkred/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWdarkred}
+      },
+      pink/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWpink}
+      },
+      purple/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWpurple}
+      },
+      grey/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWgrey}
+      },
+      gray/.code={%
+         \pgfkeysalso{themecolor=grey}
+      },
+}
+
+\newcommand{\@UOWtheme@color@defaults}{
+   \pgfkeys{/UOWtheme/color/.cd,
+      themecolor=darkblue
+   }
+}
+
+\@UOWtheme@color@defaults
+\ProcessPgfOptions{/UOWtheme/color}
+
 \setbeamercolor*{title page header}{fg=white}
 \setbeamercolor*{author}{fg=white}
 \setbeamercolor*{date}{fg=white}
-
 \setbeamercolor*{item}{fg=orange}
 
-\mode
-<all>
