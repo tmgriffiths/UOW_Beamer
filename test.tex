@@ -1,19 +1,32 @@
 \documentclass[aspectratio=169,10pt,handout]{beamer}
-\usepackage[utf8]{inputenc}
-%\usepackage[T1]{fontenc}
 \usepackage{tikz}
 \usepackage{xcolor}
-%\title{There Is No Largest Prime Number}
+\usepackage{fontspec}
+   % http://tex.stackexchange.com/questions/132873/microtype-tracking-disables-small-caps-in-lualatex
+   \defaultfontfeatures{SmallCapsFeatures={Renderer=Basic},}
+   % Serif
+   \setmainfont[%
+      Numbers=OldStyle,%
+      Renderer=Basic%
+      ]
+      {Tex Gyre Pagella}
+
+   \setsansfont[%
+      Renderer=Basic%
+      ]      
+      {TeX Gyre Heros}
+
+\title{There Is No Largest Prime Number}
 %\date[ISPN ’80]{27th International Symposium of Prime Numbers}
-%\author[Euclid]{Euclid of Alexandria \texttt{euclid@alexandria.edu}}
+\author[Euclid]{Euclid of Alexandria \texttt{euclid@alexandria.edu}}
 %\logo{\includegraphics[height=1cm]{UOW_logo_white.png}}
 
-\usetheme[themecolour=limegreen]{uow}
+\usetheme[themecolor=red,themelayout=minimal]{uow}
 
 \begin{document}
-   
+
    \maketitle
-   
+
 \begin{frame} 
 \frametitle{There Is No Largest Prime Number} 
 \begin{theorem}
@@ -27,11 +40,11 @@ There is no largest prime number.
 number not in the first $p$ numbers.
 \end{enumerate}
 \end{frame}
-
-\begin{frame}[t]
-   %\begin{tikzpicture}[overlay]
-   %   \draw[ultra thick, fill=UOWdarkred] (2,-2cm) circle (1cm);
-   %\end{tikzpicture}
-\end{frame}
-
+% \section{Some example section}
+% \begin{frame}[t]
+%    \begin{tikzpicture}[overlay]
+%       \draw[ultra thick, fill=UOWdarkred] (2,-2cm) circle (1cm);
+%    \end{tikzpicture}
+% \end{frame}
+% 
 \end{document}

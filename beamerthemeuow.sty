@@ -30,12 +30,22 @@
    themecolour/.code=\pgfkeysalso{
       color/themecolor=#1,
    },
+   %themelayout/.code=\pgfkeysalso{
+   %   inner/themelayout=#1,
+   %},
+   themelayout/.code=\pgfkeysalso{
+      outer/themelayout=#1,
+   },
+   %themelayout/.code=\pgfkeysalso{
+   %   color/themelayout=#1,
+   %},
 }
 
 % Set default values for options.
 \newcommand{\@UOWtheme@defaults}{
    \pgfkeys{/UOWtheme/.cd,
       themecolor=darkblue,
+      themelayout=default
    }
 }
 
@@ -43,6 +53,7 @@
 \usecolortheme{uow}
 \useinnertheme{uow}
 \useoutertheme{uow}
+\usefonttheme{uow}
 
 \@UOWtheme@defaults
 \ProcessPgfOptions{/UOWtheme}

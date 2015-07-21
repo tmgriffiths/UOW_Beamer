@@ -3,3 +3,159 @@
     [2015/07/18 A Beamer Outer Theme That Matches the UOW Branding Guidelines]
 
 \RequirePackage{pgfopts}
+\RequirePackage{tikz}
+\RequirePackage{calc}
+\RequirePackage{xparse}
+
+% Detection of aspect ration in order to pass on details for various aspect ratios
+% See answer to http://tex.stackexchange.com/questions/123106/detect-aspect-ratio-in-beamer
+\ExplSyntaxOn
+\NewDocumentCommand{\ifaspectratio}{mmm}{%
+   % Recover the option from those passed to the class
+   \keys_set:nf { zunbeltz/beameroptions } { \use:c { opt@beamer.cls } }
+   \str_if_eq:nVTF { #1 } \l_zunbeltz_aspectratio_tl { #2 } { #3 }
+}
+\NewDocumentCommand{\xifaspectratio}{mO{}}{%
+   % Recover the option from those passed to the class
+   \keys_set:nf { zunbeltz/beameroptions } { \use:c { opt@beamer.cls } }
+   \str_case:Vnn \l_zunbeltz_aspectratio_tl { #1 } { #2 }
+}
+% We need to define only one key, the other are treated as `unknown'
+\keys_define:nn { zunbeltz/beameroptions }{%
+   aspectratio .tl_set:N = \l_zunbeltz_aspectratio_tl,
+   aspectratio .initial:n = 43,
+   unknown .code:n = {},
+}
+
+% Generate the variants we need
+\cs_generate_variant:Nn \keys_set:nn { nf }
+\cs_generate_variant:Nn \str_if_eq:nnTF { nV }
+\cs_generate_variant:Nn \str_case:nnn { V }
+\ExplSyntaxOff
+
+\newlength{\@UOWlargerectangle@height}
+\setlength{\@UOWlargerectangle@height}{0.125\paperheight}
+\newlength{\@UOWlargerectangle@width}
+\setlength{\@UOWlargerectangle@width}{0.189\paperwidth}
+\newlength{\@UOWsmallrectangle@height}
+\setlength{\@UOWsmallrectangle@height}{0.07\paperheight}
+\newlength{\@UOWsmallrectangle@width}
+\setlength{\@UOWsmallrectangle@width}{\paperwidth-0.189\paperwidth}
+\newlength{\@UOWlogo@width}
+\setlength{\@UOWlogo@width}{0.149606\paperwidth}
+
+\defbeamertemplate{background}{bold}{%
+   \begin{tikzpicture}[overlay]
+      \filldraw[color=\@UOWtheme@color,]
+         (0,0) 
+         rectangle (\the\paperwidth, -\the\paperheight);
+      \filldraw[color=white,]
+         (0,-\the\paperheight+\@UOWsmallrectangle@height) 
+         rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
+      \filldraw[color=white,]
+         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+         rectangle (\the\paperwidth, -\the\paperheight)
+         [path picture={
+         \node at (path picture bounding box.center) {
+         \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
+         };}
+         ];
+   \end{tikzpicture}
+}
+
+\defbeamertemplate{background}{standard}{
+   \ifnum\c@framenumber=1%
+      \begin{tikzpicture}[overlay]
+         \filldraw[color=\@UOWtheme@color,]
+            (0,0) 
+            rectangle (\the\paperwidth, -\the\paperheight);
+         \filldraw[color=white,]
+            (0,-\the\paperheight+\@UOWsmallrectangle@height) 
+            rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
+         \filldraw[color=white,]
+            (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+            rectangle (\the\paperwidth, -\the\paperheight)
+            [path picture={
+            \node at (path picture bounding box.center) {
+            \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
+            };}
+            ];
+      \end{tikzpicture}
+   \else%
+      \begin{tikzpicture}[overlay]
+         \filldraw[color=\@UOWtheme@color,]
+            (0,-\the\paperheight+\@UOWsmallrectangle@height) 
+            rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
+         \filldraw[color=\@UOWtheme@color,]
+            (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+            rectangle (\the\paperwidth, -\the\paperheight)
+            [path picture={
+            \node at (path picture bounding box.center) {
+            \includegraphics[width=\@UOWlogo@width]{UOW_mono_inverted.pdf}
+            };}
+            ];
+      \end{tikzpicture}
+   \fi%
+}
+
+\defbeamertemplate{background}{minimal title}{
+   \begin{tikzpicture}[overlay]
+      \filldraw[color=\@UOWtheme@color,]
+         (0,-\the\paperheight+\@UOWsmallrectangle@height) 
+         rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
+      \filldraw[color=\@UOWtheme@color,]
+         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+         rectangle (\the\paperwidth, -\the\paperheight)
+         [path picture={
+         \node at (path picture bounding box.center) {
+         \includegraphics[width=\@UOWlogo@width]{UOW_mono_inverted.pdf}
+         };}
+         ];
+   \end{tikzpicture}
+}
+
+\defbeamertemplate{background}{minimal}{%
+   \ifnum\c@framenumber=1%
+      \begin{tikzpicture}[overlay]
+         \filldraw[color=\@UOWtheme@color,]
+            (0,-\the\paperheight+\@UOWsmallrectangle@height) 
+            rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
+         \filldraw[color=\@UOWtheme@color,]
+            (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+            rectangle (\the\paperwidth, -\the\paperheight)
+            [path picture={
+            \node at (path picture bounding box.center) {
+            \includegraphics[width=\@UOWlogo@width]{UOW_mono_inverted.pdf}
+            };}
+            ];
+      \end{tikzpicture}
+   \else%
+   %
+   \fi%
+}
+
+\pgfkeys{
+   /UOWtheme/outer/themelayout/.cd,
+      .is choice,
+      minimal/.code={%
+         \setbeamertemplate{background}[minimal]
+      },
+      minimaltitle/.code={%
+         \setbeamertemplate{background}[minimal title]
+      },
+      default/.code={%
+         \setbeamertemplate{background}[standard]% default already defined by beamer
+      },
+      bold/.code={%
+         \setbeamertemplate{background}[bold]
+      },
+}
+
+\newcommand{\@UOWtheme@outer@defaults}{
+   \pgfkeys{/UOWtheme/outer/.cd,
+      themelayout=default
+   }
+}
+
+\@UOWtheme@outer@defaults
+\ProcessPgfOptions{/UOWtheme/outer}

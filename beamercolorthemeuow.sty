@@ -19,6 +19,34 @@
    \definecolor{UOWgrey}{RGB}{69, 85, 95}
 
 \newcommand*{\@UOWtheme@color}{}
+
+\newcommand{\@UOWtheme@color@darknormaltext}{%
+   \setbeamercolor{normal text}{%
+      fg=black,
+      bg=white
+   }
+}
+
+\newcommand{\@UOWtheme@color@lightnormaltext}{%
+   \setbeamercolor{normal text}{%
+      fg=white,
+      bg=\@UOWtheme@color
+   }
+}
+
+\newcommand{\@UOWtheme@color@darktitlelike}{%
+   \setbeamercolor{titlelike}{%
+      use=normal text,
+      parent=normal text
+   }
+}
+
+\newcommand{\@UOWtheme@color@lighttitlelike}{%
+   \setbeamercolor{titlelike}{%
+      fg=white,
+   }
+}
+
 \pgfkeys{
    /UOWtheme/color/themecolor/.cd,
       .is choice,
@@ -70,19 +98,64 @@
       gray/.code={%
          \pgfkeysalso{themecolor=grey}
       },
+%}
+%
+%\pgfkeys{
+   /UOWtheme/color/themelayout/.cd,
+      .is choice,
+      minimal/.code={%
+         \@UOWtheme@color@darknormaltext%
+         \@UOWtheme@color@darktitlelike
+      },
+      minimaltitle/.code={%
+         \@UOWtheme@color@darknormaltext%
+         \@UOWtheme@color@darktitlelike
+      },
+      default/.code={%
+         \@UOWtheme@color@darknormaltext%
+         \@UOWtheme@color@lighttitlelike
+      },
+      bold/.code={%
+         \@UOWtheme@color@lightnormaltext%
+         \@UOWtheme@color@lighttitlelike
+      },
+}
+
+
+\setbeamercolor{alerted text}{%
+  fg=orange
+}
+\setbeamercolor{titlelike}{%
+  use=normal text,
+  parent=normal text
+}
+%\setbeamercolor{structure}{%
+%  fg=normal text.fg
+%}
+%\setbeamercolor{palette primary}{%
+%  use=normal text,
+%  fg=normal text.fg,
+%  bg=normal text.bg
+%}
+\setbeamercolor{frametitle}{%
+  fg=black,
+  bg=white
+  %use=palette primary,
+  %parent=palette primary
 }
 
 \newcommand{\@UOWtheme@color@defaults}{
    \pgfkeys{/UOWtheme/color/.cd,
-      themecolor=darkblue
+      themecolor=darkblue,
+%      themelayout=default
    }
 }
 
 \@UOWtheme@color@defaults
 \ProcessPgfOptions{/UOWtheme/color}
 
-\setbeamercolor*{title page header}{fg=white}
-\setbeamercolor*{author}{fg=white}
-\setbeamercolor*{date}{fg=white}
-\setbeamercolor*{item}{fg=orange}
-
+%\setbeamercolor*{title page header}{fg=white}
+%\setbeamercolor*{author}{fg=white}
+%\setbeamercolor*{date}{fg=white}
+%\setbeamercolor*{item}{fg=orange}
+%
