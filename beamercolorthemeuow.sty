@@ -18,40 +18,12 @@
    \definecolor{UOWpurple}{RGB}{74, 47, 142}
    \definecolor{UOWgrey}{RGB}{69, 85, 95}
 
-\newcommand*{\@UOWtheme@color}{}
-
-\newcommand{\@UOWtheme@color@darknormaltext}{%
-   \setbeamercolor{normal text}{%
-      fg=black,
-      bg=white
-   }
-}
-
-\newcommand{\@UOWtheme@color@lightnormaltext}{%
-   \setbeamercolor{normal text}{%
-      fg=white,
-      bg=\@UOWtheme@color
-   }
-}
-
-\newcommand{\@UOWtheme@color@darktitlelike}{%
-   \setbeamercolor{titlelike}{%
-      use=normal text,
-      parent=normal text
-   }
-}
-
-\newcommand{\@UOWtheme@color@lighttitlelike}{%
-   \setbeamercolor{titlelike}{%
-      fg=white,
-   }
-}
-
+\newcommand{\@UOWtheme@color}{}
 \pgfkeys{
    /UOWtheme/color/themecolor/.cd,
       .is choice,
       mono/.code={%
-        %\renewcommand*{\@UOWtheme@color}{\
+        \renewcommand*{\@UOWtheme@color}{UOWblack}
       },
       black/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWblack}
@@ -97,65 +69,72 @@
       },
       gray/.code={%
          \pgfkeysalso{themecolor=grey}
-      },
-%}
-%
-%\pgfkeys{
-   /UOWtheme/color/themelayout/.cd,
+      }
+}
+
+\pgfkeys{
+   /UOWtheme/color/layout/.cd,
       .is choice,
-      minimal/.code={%
+      plain/.code={%
+         \@UOWtheme@color@darktitle
          \@UOWtheme@color@darknormaltext%
-         \@UOWtheme@color@darktitlelike
+      },
+      minimal/.code={%
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext%
       },
       minimaltitle/.code={%
+         \@UOWtheme@color@darktitle
          \@UOWtheme@color@darknormaltext%
-         \@UOWtheme@color@darktitlelike
       },
-      default/.code={%
+      standard/.code={%
+         \@UOWtheme@color@lighttitle
          \@UOWtheme@color@darknormaltext%
-         \@UOWtheme@color@lighttitlelike
       },
+      boldplain/.code={%
+         \@UOWtheme@color@lighttitle
+         \@UOWtheme@color@darknormaltext%
+      }, 
       bold/.code={%
+         \@UOWtheme@color@lighttitle
          \@UOWtheme@color@lightnormaltext%
-         \@UOWtheme@color@lighttitlelike
       },
 }
 
+\newcommand{\@UOWtheme@color@darknormaltext}{%
+   \setbeamercolor{normal text}{fg=black}%
+   \setbeamercolor{frametitle}{fg=black}%
+}
 
-\setbeamercolor{alerted text}{%
-  fg=orange
+\newcommand{\@UOWtheme@color@lightnormaltext}{%
+   \setbeamercolor{normal text}{fg=white}%
+   \setbeamercolor{frametitle}{fg=white}%
 }
-\setbeamercolor{titlelike}{%
-  use=normal text,
-  parent=normal text
+
+\newcommand{\@UOWtheme@color@darktitle}{%
+   \setbeamercolor*{title}{fg=black}%
+   \setbeamercolor*{subtitle}{fg=black}%
+   \setbeamercolor*{author}{fg=black}%
+   \setbeamercolor*{institute}{fg=black}%
+   \setbeamercolor*{date}{fg=black}%
 }
-%\setbeamercolor{structure}{%
-%  fg=normal text.fg
-%}
-%\setbeamercolor{palette primary}{%
-%  use=normal text,
-%  fg=normal text.fg,
-%  bg=normal text.bg
-%}
-\setbeamercolor{frametitle}{%
-  fg=black,
-  bg=white
-  %use=palette primary,
-  %parent=palette primary
+
+\newcommand{\@UOWtheme@color@lighttitle}{%
+   \setbeamercolor*{title}{fg=white}%
+   \setbeamercolor*{subtitle}{fg=white}%
+   \setbeamercolor*{author}{fg=white}%
+   \setbeamercolor*{institute}{fg=white}%
+   \setbeamercolor*{date}{fg=white}%
 }
 
 \newcommand{\@UOWtheme@color@defaults}{
-   \pgfkeys{/UOWtheme/color/.cd,
-      themecolor=darkblue,
-%      themelayout=default
-   }
+  \pgfkeys{/UOWtheme/color/.cd,
+    themecolor=darkblue,
+    layout=standard,
+  }
 }
 
 \@UOWtheme@color@defaults
-\ProcessPgfOptions{/UOWtheme/color}
+\ProcessPgfPackageOptions{/UOWtheme/color}
 
-%\setbeamercolor*{title page header}{fg=white}
-%\setbeamercolor*{author}{fg=white}
-%\setbeamercolor*{date}{fg=white}
-%\setbeamercolor*{item}{fg=orange}
-%
+\mode<all>

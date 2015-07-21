@@ -3,7 +3,7 @@
    [2015/07/18 A Beamer Inner Theme That Matches the UOW Branding Guidelines]
 
 \setbeamertemplate{title page}{
-   \begin{minipage}[b][\paperheight]{\textwidth}
+   \begin{minipage}[b][\paperheight-\@UOWsmallrectangle@height]{\textwidth}
 %
 %   If the user has set a |titlegraphic|, we set it in a zero-height box so
 %   it doesn't change the position of other elements.
@@ -42,12 +42,12 @@
 %
 %   A horizontal rule (drawn in TikZ) separates the title and subtitle from
 %   the author, date, and institution.
-    \begin{tikzpicture}
-      \usebeamercolor{title separator}
-      \draw[fg] (0, 0) -- (\textwidth, 0);
-    \end{tikzpicture}%
-    \par%
-    \vspace*{1em}%
+%    \begin{tikzpicture}
+%      \usebeamercolor{title separator}
+%      \draw[white] (0, 0) -- (\textwidth, 0);
+%    \end{tikzpicture}%
+%    \par%
+%    \vspace*{1em}%
 %
 %   Like the title and subtitle, we display the author only when it is defined.
 %   But beamer's definition of |\insertauthor| is always nonempty, so we have
@@ -55,6 +55,7 @@
 %   defined an author. This solution was suggested by Enrico Gregorio in an
 %   answer to \href{https://tex.stackexchange.com/questions/241306/}{this
 %   Stack Exchange question}.
+%\vfill
     \ifx\beamer@shortauthor\@empty\else{{%
       \usebeamerfont{author}%
       \usebeamercolor[fg]{author}%
@@ -74,7 +75,7 @@
     }}
     \fi
     \ifx\insertinstitute\@empty\else{{%
-      \vspace*{3mm}
+      \vspace*{0.25em}
       \usebeamerfont{institute}%
       \usebeamercolor[fg]{institute}%
       \insertinstitute%
@@ -82,11 +83,9 @@
     }}
     \fi
     \vfill
-    \vspace*{1mm}
+    \vspace*{2em}
   \end{minipage}
 }
-
-%\setbeamertemplate{title page}[minimal]
 
 \def\maketitle{%
   \ifbeamer@inframe
@@ -98,3 +97,5 @@
 \def\titlepage{%
   \usebeamertemplate{title page}
 }
+
+\mode<all>

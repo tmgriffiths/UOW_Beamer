@@ -63,7 +63,7 @@
    \end{tikzpicture}
 }
 
-\defbeamertemplate{background}{standard}{
+\defbeamertemplate{background}{UOWdefault}{
    \ifnum\c@framenumber=1%
       \begin{tikzpicture}[overlay]
          \filldraw[color=\@UOWtheme@color,]
@@ -95,6 +95,29 @@
             };}
             ];
       \end{tikzpicture}
+   \fi%
+}
+
+\defbeamertemplate{background}{bold plain}{
+   \ifnum\c@framenumber=1%
+      \begin{tikzpicture}[overlay]
+         \filldraw[color=\@UOWtheme@color,]
+            (0,0) 
+            rectangle (\the\paperwidth, -\the\paperheight);
+         \filldraw[color=white,]
+            (0,-\the\paperheight+\@UOWsmallrectangle@height) 
+            rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
+         \filldraw[color=white,]
+            (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+            rectangle (\the\paperwidth, -\the\paperheight)
+            [path picture={
+            \node at (path picture bounding box.center) {
+            \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
+            };}
+            ];
+      \end{tikzpicture}
+   \else%
+      %
    \fi%
 }
 
@@ -130,32 +153,44 @@
             ];
       \end{tikzpicture}
    \else%
-   %
+      %
    \fi%
 }
 
+\defbeamertemplate{background}{UOWplain}{%
+%
+}
+
 \pgfkeys{
-   /UOWtheme/outer/themelayout/.cd,
+   /UOWtheme/outer/layout/.cd,
       .is choice,
       minimal/.code={%
-         \setbeamertemplate{background}[minimal]
+         \setbeamertemplate{background}[minimal]%
       },
       minimaltitle/.code={%
          \setbeamertemplate{background}[minimal title]
       },
-      default/.code={%
-         \setbeamertemplate{background}[standard]% default already defined by beamer
+      standard/.code={%
+         \setbeamertemplate{background}[UOWdefault]% default already defined by beamer
       },
       bold/.code={%
-         \setbeamertemplate{background}[bold]
+         \setbeamertemplate{background}[bold]%
+      },
+      boldplain/.code={%
+         \setbeamertemplate{background}[bold plain]%
+      },
+      plain/.code={%
+         \setbeamertemplate{background}[UOWplain]%
       },
 }
 
 \newcommand{\@UOWtheme@outer@defaults}{
    \pgfkeys{/UOWtheme/outer/.cd,
-      themelayout=default
+      layout=standard,
    }
 }
 
 \@UOWtheme@outer@defaults
-\ProcessPgfOptions{/UOWtheme/outer}
+\ProcessPgfPackageOptions{/UOWtheme/outer}
+
+\mode<all>

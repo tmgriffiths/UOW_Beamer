@@ -17,49 +17,48 @@
 
 % UOWthem/themecolour is equivalent to UOWthem/*/themecolour from the sub-packages.
 \pgfkeys{/UOWtheme/.cd,
-   .search also={
-      /UOWtheme/inner,
-      /UOWtheme/outer,
-      /UOWtheme/color,
-   },
-% Alias themecolour to themecolor
-   /UOWtheme/themecolour/.style={
-      UOWtheme/themecolor=#1
-   },
-% Forward keys that affect sub-packages manually.
-   themecolour/.code=\pgfkeysalso{
-      color/themecolor=#1,
-   },
-   %themelayout/.code=\pgfkeysalso{
-   %   inner/themelayout=#1,
-   %},
-   themelayout/.code=\pgfkeysalso{
-      outer/themelayout=#1,
-   },
-   %themelayout/.code=\pgfkeysalso{
-   %   color/themelayout=#1,
-   %},
+  .search also={
+    /UOWtheme/inner,
+    /UOWtheme/outer,
+    /UOWtheme/color,
+  },
+  layout/.code=\pgfkeysalso{
+    outer/layout=#1,
+    color/layout=#1,
+  },
+  themecolour/.code=\pgfkeysalso{%
+     color/themecolor=#1,%
+  },
 }
 
+
+%% Alias themecolour to themecolor
+\pgfkeys{%
+   /UOWtheme/themecolour/.style={
+      /UOWtheme/themecolor=#1
+   },
+}
 % Set default values for options.
 \newcommand{\@UOWtheme@defaults}{
    \pgfkeys{/UOWtheme/.cd,
       themecolor=darkblue,
-      themelayout=default
+      layout=standard,
    }
 }
 
 % Settings
-\usecolortheme{uow}
-\useinnertheme{uow}
-\useoutertheme{uow}
-\usefonttheme{uow}
 
-\@UOWtheme@defaults
-\ProcessPgfOptions{/UOWtheme}
 
 % use circles for bullet points
 %\setbeamertemplate{items}[circle]
 % No naigation symbols in the bottom corner
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{blocks}[rounded][shadow=false]  
+
+\useinnertheme{uow}
+\useoutertheme{uow}
+\usecolortheme{uow}
+\usefonttheme{uow}
+
+\@UOWtheme@defaults
+\ProcessPgfOptions{/UOWtheme}
