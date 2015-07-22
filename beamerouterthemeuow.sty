@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerouterthemeuow}
-    [2015/07/18 A Beamer Outer Theme That Matches the UOW Branding Guidelines]
+   [2015/07/18 A Beamer Outer Theme That Matches the UOW Branding Guidelines]
 
 \RequirePackage{pgfopts}
 \RequirePackage{tikz}
@@ -34,16 +34,56 @@
 \cs_generate_variant:Nn \str_case:nnn { V }
 \ExplSyntaxOff
 
+% Lengths
 \newlength{\@UOWlargerectangle@height}
-\setlength{\@UOWlargerectangle@height}{0.125\paperheight}
 \newlength{\@UOWlargerectangle@width}
-\setlength{\@UOWlargerectangle@width}{0.189\paperwidth}
 \newlength{\@UOWsmallrectangle@height}
-\setlength{\@UOWsmallrectangle@height}{0.06\paperheight}
 \newlength{\@UOWsmallrectangle@width}
-\setlength{\@UOWsmallrectangle@width}{\paperwidth-0.189\paperwidth}
 \newlength{\@UOWlogo@width}
-\setlength{\@UOWlogo@width}{0.149606\paperwidth}
+\xifaspectratio{
+   {1610}{% HEIGHT = [169]/10*9 | Width = [169]/16*16
+   \setlength{\@UOWlargerectangle@height}{0.1125\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.189\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.054\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.189\paperwidth}
+   \setlength{\@UOWlogo@width}{0.149606\paperwidth}   
+   }
+   {169}{% ORIGINALS AND CALCULATED FROM PPT
+   \setlength{\@UOWlargerectangle@height}{0.125\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.189\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.06\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.189\paperwidth}
+   \setlength{\@UOWlogo@width}{0.149606\paperwidth}
+   }
+   {149}{% HEIGHT = [169]/9*9 | Width = [169]/14*16
+   \setlength{\@UOWlargerectangle@height}{0.125\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.216\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.06\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.216\paperwidth}
+   \setlength{\@UOWlogo@width}{0.171\paperwidth}
+   }
+   {54}{% HEIGHT = [169]/10*9 | Width = [169]/12.50*16
+   \setlength{\@UOWlargerectangle@height}{0.113\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.242\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.054\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.242\paperwidth}
+   \setlength{\@UOWlogo@width}{0.192\paperwidth}
+   }
+   {43}{% HEIGHT = [169]/9.60*9 | Width = [169]/12.80*16
+   \setlength{\@UOWlargerectangle@height}{0.117\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.236\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.056\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.236\paperwidth}
+   \setlength{\@UOWlogo@width}{0.187\paperwidth}
+   }
+   {32}{% HEIGHT = [169]/9*9 | Width = [169]/13.5*16
+   \setlength{\@UOWlargerectangle@height}{0.125\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.224\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.06\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.224\paperwidth}
+   \setlength{\@UOWlogo@width}{0.177\paperwidth}
+   }
+}
 
 \defbeamertemplate{background}{bold}{%
    \begin{tikzpicture}[overlay]
@@ -202,7 +242,7 @@
    \fi%
 }
 
-\newcommand{\@UOWtheme@framenumberseperator}{~\textit{of}~}
+\newcommand{\@UOWtheme@framenumberseperator}{/}
 \defbeamertemplate{frame numbering}{none}{}
 \defbeamertemplate{frame numbering}{counter}{
    \ifnum\c@framenumber=1%
@@ -226,22 +266,32 @@
    }
 }
 
-\setbeamertemplate{footline}{%
-  \hfill
-\begin{beamercolorbox}[wd=0.1\textwidth, sep=3ex]{footline}%%
-  \usebeamercolor[fg]{page number in head/foot}
-  \usebeamerfont{page number in head/foot}%
-  \usebeamertemplate*{frame numbering}
-  %hspace{3ex}\vspace*{3ex}
-\end{beamercolorbox}%
+\newcommand{\@UOWtheme@framenumberfootline}{%
+   \setbeamertemplate{footline}{%
+      %\begin{beamercolorbox}[wd=\textwidth, sep=3ex]{footline}%
+         \hfill
+         \usebeamercolor[fg]{page number in head/foot}
+         \usebeamerfont{page number in head/foot}%
+         \usebeamertemplate*{frame numbering}
+         \hspace{1.5ex}\vspace*{1.5ex}
+      %\end{beamercolorbox}%
+   }
 }
 
-\pgfkeys{
-  /UOWtheme/outer/framenumbering/.cd,
-    .is choice,
-    none/.code=\setbeamertemplate{frame numbering}[none],
-    counter/.code=\setbeamertemplate{frame numbering}[counter],
-    fraction/.code=\setbeamertemplate{frame numbering}[fraction],
+\pgfkeys{%
+   /UOWtheme/outer/framenumbering/.cd,
+      .is choice,
+      none/.code={%
+         \setbeamertemplate{frame numbering}[none]%
+         },
+      counter/.code={%
+         \setbeamertemplate{frame numbering}[counter]%
+         \@UOWtheme@framenumberfootline%
+         },
+      fraction/.code={%
+         \setbeamertemplate{frame numbering}[fraction]%
+         \@UOWtheme@framenumberfootline%
+      },
 }
 
 \pgfkeys{
@@ -253,19 +303,19 @@
       minimaltitle/.code={%
          \setbeamertemplate{background}[minimal title]%
          \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
-            \advance\footheight by 0.6\@UOWsmallrectangle@height
+            \advance\footheight by 1.2\@UOWsmallrectangle@height
             }{}{}
       },
       standard/.code={%
          \setbeamertemplate{background}[UOWdefault]% default already defined by beamer
          \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
-            \advance\footheight by 0.6\@UOWsmallrectangle@height
+            \advance\footheight by 1.2\@UOWsmallrectangle@height
             }{}{}
       },
       bold/.code={%
          \setbeamertemplate{background}[bold]%
          \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
-            \advance\footheight by 0.6\@UOWsmallrectangle@height
+            \advance\footheight by 1.2\@UOWsmallrectangle@height
             }{}{}
       },
       boldplain/.code={%
@@ -274,7 +324,7 @@
       eco/.code={%
          \setbeamertemplate{background}[eco]%
          \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
-            \advance\footheight by 0.6\@UOWsmallrectangle@height
+            \advance\footheight by 1.2\@UOWsmallrectangle@height
             }{}{}
       },
       ecominimal/.code={%

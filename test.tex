@@ -1,21 +1,21 @@
-%!TEX TS-program = pdflatex
-\documentclass[aspectratio=169,12pt,handout]{beamer}
+%!TEX TS-program = lualatex
+\documentclass[aspectratio=1610,11pt]{beamer}
 \usepackage{tikz}
 \usepackage{xcolor}
-%\usepackage{fontspec}
-%   % http://tex.stackexchange.com/questions/132873/microtype-tracking-disables-small-caps-in-lualatex
-%   \defaultfontfeatures{SmallCapsFeatures={Renderer=Basic},}
-%   % Serif
-%   \setmainfont[%
-%      Numbers=OldStyle,%
-%      Renderer=Basic%
-%      ]
-%      {Tex Gyre Pagella}
-%
-%   \setsansfont[%
-%      Renderer=Basic%
-%      ]      
-%      {TeX Gyre Heros}
+\usepackage{fontspec}
+   % http://tex.stackexchange.com/questions/132873/microtype-tracking-disables-small-caps-in-lualatex
+   \defaultfontfeatures{SmallCapsFeatures={Renderer=Basic},}
+   % Serif
+   \setmainfont[%
+      Numbers=OldStyle,%
+      Renderer=Basic%
+      ]
+      {Tex Gyre Pagella}
+
+   \setsansfont[%
+      Renderer=Basic%
+      ]      
+      {TeX Gyre Heros}
 
 \title{There Is No Largest Prime Number}
 \subtitle{A Proof by Reduction to Absurdity}
@@ -23,7 +23,7 @@
 \institute{School of Chemistry}
 \date{}
 
-\usetheme[layout=bold]{uow}
+\usetheme[layout=boldplain,themecolor=darkred,framenumbering=counter]{uow}
 
 \begin{document}
 
@@ -48,8 +48,7 @@ There is no largest prime number.
 \item Suppose $p$ were the largest prime number. 
 \item Let $q$ be the product of the first $p$ numbers.\footnote{An example footnote.}
 \item Then $q+1$ is not divisible by any of them. 
-\item But $q + 1$ is greater than $1$, thus divisible by some prime
-number not in the first $p$ numbers.\footnote{A second example footnote.}
+\item But $q + 1$ is greater than $1$, thus divisible by some prime number not in the first $p$ numbers.\footnote{A second example footnote.}
 \end{enumerate}
 \end{frame}
 

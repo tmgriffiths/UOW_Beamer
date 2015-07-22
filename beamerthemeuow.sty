@@ -13,30 +13,30 @@
 \RequirePackage{ifxetex}
 \RequirePackage{ifluatex}
 
-% Define a macro for the user to set options in the theme (just a color or mono at this stage).
+% Define a macro for the user to set options in the theme (just a color or eco at this stage).
 \newcommand{\UOWthemeset}[1]{\pgfkeys{/UOWtheme/.cd,#1}}
 
-% UOWthem/themecolour is equivalent to UOWthem/*/themecolour from the sub-packages.
+% UOWtheme/themecolour is equivalent to UOWtheme/*/themecolour from the sub-packages.
 \pgfkeys{/UOWtheme/.cd,
-  .search also={
-    /UOWtheme/inner,
-    /UOWtheme/outer,
-    /UOWtheme/color,
-  },
-  layout/.code=\pgfkeysalso{
-    outer/layout=#1,
-    color/layout=#1,
-  },
-  themecolour/.code=\pgfkeysalso{%
-     color/themecolor=#1,%
-  },
+   .search also={
+      /UOWtheme/inner,
+      /UOWtheme/outer,
+      /UOWtheme/color,
+   },
+   layout/.code=\pgfkeysalso{
+      outer/layout=#1,
+      color/layout=#1,
+   },
+   themecolour/.code=\pgfkeysalso{%
+      color/themecolor=#1,%
+   },
 }
 
 
 %% Alias themecolour to themecolor
 \pgfkeys{%
-   /UOWtheme/themecolour/.style={
-      /UOWtheme/themecolor=#1
+   /themecolour/.style={
+      /themecolor=#1
    },
 }
 % Set default values for options.
@@ -44,11 +44,11 @@
    \pgfkeys{/UOWtheme/.cd,
       themecolor=blue,
       layout=standard,
+      framenumbering=none,
    }
 }
 
-% Settings
-
+% subpackages
 \useinnertheme{uow}
 \useoutertheme{uow}
 \usecolortheme{uow}

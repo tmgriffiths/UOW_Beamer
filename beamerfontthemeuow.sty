@@ -1,20 +1,25 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerfontthemeuow}
     [2015/07/18 A Beamer Font Theme That Matches the UOW Branding Guidelines]
-    
-\RequirePackage[tracking=true]{microtype}
-   \newcommand{\allcapsspacing}[1]{\textls*[60]{#1}}%
-   \newcommand{\allcaps}[1]{\allcapsspacing{\MakeUppercase{#1}}}%
+\RequirePackage{ifxetex}
+
+\ifxetex
+   \RequirePackage{microtype}
+\else
+   \RequirePackage[tracking=true]{microtype}
+      \renewcommand*{\allcapsspacing}[1]{\textls*[50]{#1}}%
+      \renewcommand*{\allcaps}[1]{\allcapsspacing{\MakeUppercase{#1}}}%
+\fi
 % Font Assignment
 \setbeamerfont*{title}{size=\huge,}
-\setbeamerfont*{author}{size=\small}
-\setbeamerfont*{date}{size=\small}
-\setbeamerfont*{institute}{size=\small}
-\setbeamerfont*{section title}{size=\large, shape=\bfseries}
+\setbeamerfont*{author}{size=\normalsize}
+\setbeamerfont*{date}{size=\normalsize}
+\setbeamerfont*{institute}{size=\normalsize}
+%\setbeamerfont*{section title}{size=\Large, shape=\bfseries}
 \setbeamerfont*{block title}{size=\normalsize}
 \setbeamerfont*{block title alerted}{size=\normalsize}
 \setbeamerfont*{subtitle}{size=\normalsize,}
-\setbeamerfont*{frametitle}{size=\large, shape=\bfseries}
+\setbeamerfont*{frametitle}{size=\Large, shape=\bfseries}
 \setbeamerfont*{alerted text}{shape=\bfseries}
 \setbeamerfont*{caption}{size=\small, shape=\bfseries}
 \setbeamerfont*{page number in head/foot}{size=\scriptsize}
