@@ -22,7 +22,7 @@
 \pgfkeys{
    /UOWtheme/color/themecolor/.cd,
       .is choice,
-      mono/.code={%
+      eco/.code={%
         \renewcommand*{\@UOWtheme@color}{UOWblack}
       },
       black/.code={%
@@ -79,6 +79,14 @@
          \@UOWtheme@color@darktitle
          \@UOWtheme@color@darknormaltext%
       },
+      eco/.code={%
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext%
+      },
+      ecominimal/.code={%
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext%
+      },
       minimal/.code={%
          \@UOWtheme@color@darktitle
          \@UOWtheme@color@darknormaltext%
@@ -108,7 +116,7 @@
 
 \newcommand{\@UOWtheme@color@lightnormaltext}{%
    \setbeamercolor{normal text}{fg=white}%
-   \setbeamercolor{frametitle}{fg=white}%
+   \setbeamercolor{frametitle}{fg=white,bg=\@UOWtheme@color}%
 }
 
 \newcommand{\@UOWtheme@color@darktitle}{%
@@ -129,9 +137,31 @@
 
 \newcommand{\@UOWtheme@color@defaults}{
   \pgfkeys{/UOWtheme/color/.cd,
-    themecolor=darkblue,
+    themecolor=blue,
     layout=standard,
   }
+}
+
+\setbeamercolor{alerted text}{%
+  fg=UOWdarkred
+}
+\setbeamercolor{example text}{%
+  fg=UOWdarkgreen
+}
+\setbeamercolor{titlelike}{%
+  use=normal text,
+  parent=normal text
+}
+\setbeamercolor{structure}{%
+  fg=normal text.fg
+}
+\setbeamercolor{palette primary}{%
+  use=normal text,
+  fg=normal text.bg,
+  bg=normal text.fg
+}
+\setbeamercolor{page number in head/foot}{%
+   fg=black!50
 }
 
 \@UOWtheme@color@defaults

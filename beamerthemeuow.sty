@@ -7,6 +7,7 @@
 \RequirePackage{xcolor}
 \RequirePackage{xparse}
 \RequirePackage{etex}
+\RequirePackage{calc}
 \RequirePackage{etoolbox}
 \RequirePackage{pgfopts}
 \RequirePackage{ifxetex}
@@ -41,19 +42,12 @@
 % Set default values for options.
 \newcommand{\@UOWtheme@defaults}{
    \pgfkeys{/UOWtheme/.cd,
-      themecolor=darkblue,
+      themecolor=blue,
       layout=standard,
    }
 }
 
 % Settings
-
-
-% use circles for bullet points
-%\setbeamertemplate{items}[circle]
-% No naigation symbols in the bottom corner
-\setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{blocks}[rounded][shadow=false]  
 
 \useinnertheme{uow}
 \useoutertheme{uow}

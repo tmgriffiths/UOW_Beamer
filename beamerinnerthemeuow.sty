@@ -1,9 +1,15 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerinnerthemeuow}
    [2015/07/18 A Beamer Inner Theme That Matches the UOW Branding Guidelines]
+\RequirePackage{calc}
+
+\newlength\beamerleftmargin
+\newlength\beamerrightmargin
+\setlength\beamerleftmargin{\Gm@lmargin}
+\setlength\beamerrightmargin{\Gm@rmargin}
 
 \setbeamertemplate{title page}{
-   \begin{minipage}[b][\paperheight-\@UOWsmallrectangle@height]{\textwidth}
+   \begin{minipage}[t][\paperheight][t]{\@UOWsmallrectangle@width-\beamerleftmargin}
 %
 %   If the user has set a |titlegraphic|, we set it in a zero-height box so
 %   it doesn't change the position of other elements.
@@ -21,6 +27,7 @@
 %   We set the title and subtitle, but only if they are defined by the user.
 %   If |\subtitle| is empty, for example, it won't leave a blank space on the
 %   title slide.
+    \vspace*{0.12\paperheight}
     \ifx\inserttitle\@empty\else{{%
       \raggedright%
       \linespread{1.0}%
@@ -28,7 +35,7 @@
       \usebeamercolor[fg]{title}%
       \allcaps{\inserttitle}%
       \par%
-      \vspace*{0.5em}
+      %\vspace*{0.5em}
     }}
     \fi
     \ifx\insertsubtitle\@empty\else{{%
@@ -36,7 +43,7 @@
       \usebeamercolor[fg]{subtitle}%
       \insertsubtitle%
       \par%
-      \vspace*{0.5em}
+      \vspace*{1em}
     }}
     \fi
 %
@@ -49,22 +56,6 @@
 %    \par%
 %    \vspace*{1em}%
 %
-%   Like the title and subtitle, we display the author only when it is defined.
-%   But beamer's definition of |\insertauthor| is always nonempty, so we have
-%   to test another macro initialized by |\author{...}| to see if the user has
-%   defined an author. This solution was suggested by Enrico Gregorio in an
-%   answer to \href{https://tex.stackexchange.com/questions/241306/}{this
-%   Stack Exchange question}.
-%\vfill
-    \ifx\beamer@shortauthor\@empty\else{{%
-      \usebeamerfont{author}%
-      \usebeamercolor[fg]{author}%
-      \insertauthor%
-      \par%
-      \vspace*{0.25em}
-    }}
-    \fi
-%
 %   The date and institute are set after the author, again provided they are
 %   nonempty. Note that the default date in \LaTeX{} is |\today|, not |\empty|.
     \ifx\insertdate\@empty\else{{%
@@ -74,16 +65,31 @@
       \par%
     }}
     \fi
-    \ifx\insertinstitute\@empty\else{{%
+%   Like the title and subtitle, we display the author only when it is defined.
+%   But beamer's definition of |\insertauthor| is always nonempty, so we have
+%   to test another macro initialized by |\author{...}| to see if the user has
+%   defined an author. This solution was suggested by Enrico Gregorio in an
+%   answer to \href{https://tex.stackexchange.com/questions/241306/}{this
+%   Stack Exchange question}.
+\vfill
+    \ifx\beamer@shortauthor\@empty\else{{%
+      \usebeamerfont{author}%
+      \usebeamercolor[fg]{author}%
+      \insertauthor%
+      \par%
       \vspace*{0.25em}
+    }}
+    \fi
+    \ifx\insertinstitute\@empty\else{{%
+      %\vspace*{0.5em}
       \usebeamerfont{institute}%
       \usebeamercolor[fg]{institute}%
       \insertinstitute%
       \par%
     }}
     \fi
-    \vfill
-    \vspace*{2em}
+%    \vfill
+    \vspace*{\@UOWlargerectangle@height}
   \end{minipage}
 }
 
@@ -96,6 +102,21 @@
 }
 \def\titlepage{%
   \usebeamertemplate{title page}
+}
+
+% Textblock settings
+\setlength{\parskip}{0.5em}
+\linespread{1.15}
+% Bullet point styles
+\setbeamertemplate{itemize items}{\textbullet}
+% Captions
+\setbeamertemplate{caption label separator}{: }
+\setbeamertemplate{caption}[numbered]
+% Footnotes
+\setbeamertemplate{footnote}{%
+  \parindent 0em\noindent%
+  \raggedright
+  \usebeamercolor{footnote}\hbox to 0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
 }
 
 \mode<all>

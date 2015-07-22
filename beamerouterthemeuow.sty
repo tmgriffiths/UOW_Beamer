@@ -6,6 +6,7 @@
 \RequirePackage{tikz}
 \RequirePackage{calc}
 \RequirePackage{xparse}
+\RequirePackage{etoolbox}
 
 % Detection of aspect ration in order to pass on details for various aspect ratios
 % See answer to http://tex.stackexchange.com/questions/123106/detect-aspect-ratio-in-beamer
@@ -38,7 +39,7 @@
 \newlength{\@UOWlargerectangle@width}
 \setlength{\@UOWlargerectangle@width}{0.189\paperwidth}
 \newlength{\@UOWsmallrectangle@height}
-\setlength{\@UOWsmallrectangle@height}{0.07\paperheight}
+\setlength{\@UOWsmallrectangle@height}{0.06\paperheight}
 \newlength{\@UOWsmallrectangle@width}
 \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.189\paperwidth}
 \newlength{\@UOWlogo@width}
@@ -161,6 +162,88 @@
 %
 }
 
+\defbeamertemplate{background}{eco}{%
+   \begin{tikzpicture}[overlay]
+      \draw[color=white,]
+         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+         rectangle (\the\paperwidth, -\the\paperheight)
+         [path picture={
+         \node at (path picture bounding box.center) {
+         \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
+         };}
+         ];
+         \draw[thick, color=\@UOWtheme@color,] 
+         (0,-\the\paperheight+\@UOWsmallrectangle@height) --
+         (\@UOWsmallrectangle@width, -\the\paperheight+0.5+\@UOWsmallrectangle@height) -- 
+         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) --
+         (\the\paperwidth,-\the\paperheight+\@UOWlargerectangle@height);
+   \end{tikzpicture}
+}
+
+\defbeamertemplate{background}{ecominimal}{%
+   \ifnum\c@framenumber=1%
+   \begin{tikzpicture}[overlay]
+      \draw[color=white,]
+         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+         rectangle (\the\paperwidth, -\the\paperheight)
+         [path picture={
+         \node at (path picture bounding box.center) {
+         \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
+         };}
+         ];
+         \draw[thick, color=\@UOWtheme@color,] 
+         (0,-\the\paperheight+\@UOWsmallrectangle@height) --
+         (\@UOWsmallrectangle@width, -\the\paperheight+0.5*\the\@UOWlargerectangle@height) -- 
+         (\@UOWsmallrectangle@width,-\the\paperheight+\the\@UOWlargerectangle@height) --
+         (\the\paperwidth,-\the\paperheight+\@UOWlargerectangle@height);
+   \end{tikzpicture}
+   \else%
+      %
+   \fi%
+}
+
+\newcommand{\@UOWtheme@framenumberseperator}{~\textit{of}~}
+\defbeamertemplate{frame numbering}{none}{}
+\defbeamertemplate{frame numbering}{counter}{
+   \ifnum\c@framenumber=1%
+   %
+   \else
+      \insertframenumber
+   \fi
+}
+\defbeamertemplate{frame numbering}{fraction}{
+   \ifnum\c@framenumber=1%
+   %
+   \else
+   \insertframenumber\@UOWtheme@framenumberseperator\inserttotalframenumber
+   \fi
+}
+
+\newcommand{\@UOWtheme@outer@defaults}{
+   \pgfkeys{/UOWtheme/outer/.cd,
+      layout=standard,
+      framenumbering=none,
+   }
+}
+
+\setbeamertemplate{footline}{%
+  \hfill
+\begin{beamercolorbox}[wd=0.1\textwidth, sep=3ex]{footline}%%
+  \usebeamercolor[fg]{page number in head/foot}
+  \usebeamerfont{page number in head/foot}%
+  \usebeamertemplate*{frame numbering}
+  %hspace{3ex}\vspace*{3ex}
+\end{beamercolorbox}%
+}
+
+\pgfkeys{
+  /UOWtheme/outer/framenumbering/.cd,
+    .is choice,
+    none/.code=\setbeamertemplate{frame numbering}[none],
+    counter/.code=\setbeamertemplate{frame numbering}[counter],
+    fraction/.code=\setbeamertemplate{frame numbering}[fraction],
+}
+
 \pgfkeys{
    /UOWtheme/outer/layout/.cd,
       .is choice,
@@ -168,27 +251,42 @@
          \setbeamertemplate{background}[minimal]%
       },
       minimaltitle/.code={%
-         \setbeamertemplate{background}[minimal title]
+         \setbeamertemplate{background}[minimal title]%
+         \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
+            \advance\footheight by 0.6\@UOWsmallrectangle@height
+            }{}{}
       },
       standard/.code={%
          \setbeamertemplate{background}[UOWdefault]% default already defined by beamer
+         \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
+            \advance\footheight by 0.6\@UOWsmallrectangle@height
+            }{}{}
       },
       bold/.code={%
          \setbeamertemplate{background}[bold]%
+         \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
+            \advance\footheight by 0.6\@UOWsmallrectangle@height
+            }{}{}
       },
       boldplain/.code={%
          \setbeamertemplate{background}[bold plain]%
+      },
+      eco/.code={%
+         \setbeamertemplate{background}[eco]%
+         \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
+            \advance\footheight by 0.6\@UOWsmallrectangle@height
+            }{}{}
+      },
+      ecominimal/.code={%
+         \setbeamertemplate{background}[ecominimal]%
       },
       plain/.code={%
          \setbeamertemplate{background}[UOWplain]%
       },
 }
 
-\newcommand{\@UOWtheme@outer@defaults}{
-   \pgfkeys{/UOWtheme/outer/.cd,
-      layout=standard,
-   }
-}
+% No navigation symbols in the bottom corner
+\setbeamertemplate{navigation symbols}{}
 
 \@UOWtheme@outer@defaults
 \ProcessPgfPackageOptions{/UOWtheme/outer}

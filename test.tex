@@ -1,31 +1,44 @@
-%!TEX TS-program = lualatex
-\documentclass[aspectratio=169,10pt,handout]{beamer}
+%!TEX TS-program = pdflatex
+\documentclass[aspectratio=169,12pt,handout]{beamer}
 \usepackage{tikz}
 \usepackage{xcolor}
-\usepackage{fontspec}
-   % http://tex.stackexchange.com/questions/132873/microtype-tracking-disables-small-caps-in-lualatex
-   \defaultfontfeatures{SmallCapsFeatures={Renderer=Basic},}
-   % Serif
-   \setmainfont[%
-      Numbers=OldStyle,%
-      Renderer=Basic%
-      ]
-      {Tex Gyre Pagella}
-
-   \setsansfont[%
-      Renderer=Basic%
-      ]      
-      {TeX Gyre Heros}
+%\usepackage{fontspec}
+%   % http://tex.stackexchange.com/questions/132873/microtype-tracking-disables-small-caps-in-lualatex
+%   \defaultfontfeatures{SmallCapsFeatures={Renderer=Basic},}
+%   % Serif
+%   \setmainfont[%
+%      Numbers=OldStyle,%
+%      Renderer=Basic%
+%      ]
+%      {Tex Gyre Pagella}
+%
+%   \setsansfont[%
+%      Renderer=Basic%
+%      ]      
+%      {TeX Gyre Heros}
 
 \title{There Is No Largest Prime Number}
-\author[Euclid]{Euclid of Alexandria \texttt{euclid@alexandria.edu}}
+\subtitle{A Proof by Reduction to Absurdity}
+\author[Euclid]{Euclid of Alexandria}
+\institute{School of Chemistry}
+\date{}
 
-\usetheme[layout=boldplain,themecolor=green]{uow}
+\usetheme[layout=bold]{uow}
 
 \begin{document}
 
    \maketitle
 
+\begin{frame}[fragile]
+\frametitle{Typography}
+\begin{verbatim}
+The theme provides sensible defaults to \emph{emphasize} text, 
+\alert{accent} parts or show \textbf{bold} results.
+\end{verbatim}
+\begin{center} \textit{becomes} \end{center}
+The theme provides sensible defaults to \emph{emphasize} text, \alert{accent} parts or show \textbf{bold} results.
+\end{frame}
+% 
 \begin{frame} 
 \frametitle{There Is No Largest Prime Number} 
 \begin{theorem}
@@ -33,15 +46,25 @@ There is no largest prime number.
 \end{theorem} 
 \begin{enumerate} 
 \item Suppose $p$ were the largest prime number. 
-\item Let $q$ be the product of the first $p$ numbers. 
+\item Let $q$ be the product of the first $p$ numbers.\footnote{An example footnote.}
 \item Then $q+1$ is not divisible by any of them. 
 \item But $q + 1$ is greater than $1$, thus divisible by some prime
-number not in the first $p$ numbers.
+number not in the first $p$ numbers.\footnote{A second example footnote.}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[t]
-Some text...
+\begin{frame}{Itemised Lists With Columns}
+   \begin{columns}[T]
+      \begin{column}{0.48\textwidth}
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.
+      \end{column}
+      \begin{column}{0.48\textwidth}
+      \begin{itemize}
+         \item One point
+         \item Another point
+         \item And a \alert{third}!
+      \end{itemize}
+      \end{column}
+   \end{columns}
 \end{frame}
-% 
 \end{document}
