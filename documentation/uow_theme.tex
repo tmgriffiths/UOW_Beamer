@@ -1,0 +1,115 @@
+%!TEX TS-program = lualatex
+\documentclass[a4paper,oneside,11pt]{article}
+\usepackage{fontspec}
+   % http://tex.stackexchange.com/questions/132873/microtype-tracking-disables-small-caps-in-lualatex
+   \defaultfontfeatures{SmallCapsFeatures={Renderer=Basic},}
+   % Serif
+   \setmainfont[%
+      %Numbers=OldStyle,%
+      Renderer=Basic%
+      ]
+      {Tex Gyre Pagella}
+
+   \setsansfont[%
+      Renderer=Basic%
+      ]      
+      {TeX Gyre Heros}
+      
+\usepackage[protrusion=true, tracking=true]{microtype}
+      
+\usepackage{geometry}
+   \geometry{
+      marginparsep=1.5em,
+      marginparwidth={0.25\linewidth},
+      inner=0.35\linewidth,
+      a4paper,
+   }
+
+\usepackage{xcolor}
+   % Use the UOW colour pallet
+   \definecolor{UOWblack}{RGB}{0, 0, 0}
+   \definecolor{UOWgold}{RGB}{253, 184, 19}
+   \definecolor{UOWdarkblue}{RGB}{0, 83, 154}
+   \definecolor{UOWred}{RGB}{238, 64, 52}
+   \definecolor{UOWblue}{RGB}{0, 149, 214}
+   \definecolor{UOWdarkgreen}{RGB}{0, 146, 94}
+   \definecolor{UOWlimegreen}{RGB}{183, 198, 38}
+   \definecolor{UOWorange}{RGB}{243, 121, 32}
+   \definecolor{UOWdarkred}{RGB}{195, 18, 48}
+   \definecolor{UOWpink}{RGB}{238 ,0, 139}
+   \definecolor{UOWpurple}{RGB}{74, 47, 142}
+   \definecolor{UOWgrey}{RGB}{69, 85, 95}
+
+\usepackage{titlesec}
+    \titleformat{\section}
+        {\color{UOWblue}\normalfont\large\sffamily}
+        {\color{UOWblue}\thesection}{1em}{}
+    \titleformat{\subsection}
+        {\color{UOWred}\normalfont\sffamily}
+        {\color{UOWred}\thesection}{1em}{}
+
+\usepackage{multicol}
+\usepackage{marginfix}
+   \reversemarginpar
+   \makeatletter
+      \renewcommand{\@marginparreset}{%
+         \raggedleft
+         \reset@font\footnotesize
+         \@setminipage
+         }
+   \makeatother
+   
+\usepackage{pdfpages}
+\usepackage[colorlinks=true, allcolors=UOWdarkblue]{hyperref}
+
+\newcommand{\key}[1]{\textit{\texttt{\color{UOWorange}#1}}} 
+\newcommand{\val}[1]{\textit{\texttt{\color{UOWblue}#1}}} 
+\newcommand{\command}[1]{\texttt{\color{UOWdarkgreen}#1}} 
+
+
+\title{\textsf{The UOW Beamer Theme}}
+\author{Thomas M. Griffiths}
+\date{Released \today, Version 1.0}
+
+\begin{document}
+
+\maketitle
+
+\section{About}
+This theme ports the UOW powerpoint templates over to Beamer, a LaTeX class for presentations. The template has been set up so that the layout for the entire presentation is selected and the slides are formatted as appropriate, individual slides cannot be themed at this stage. See section \ref{sec:options} for examples. Each layout can be coloured with the UOW Branding colours, which are available also for the user to use as colours for objects in their presentation.
+
+\section{Usage}
+The entire theme consists of five files, an demo and two logos (see below). To use the theme in your presentation simply place the files in the working directory of your latex document. In your document load the theme via:\\
+
+\command{\textbackslash{}usetheme[\key{key}=\val{value}, \key{key}=\val{value}]\{uow\}}\\
+
+\noindent Note, that the \command{\key{key}=\val{value}} entries are optional. For an explanation of each \key{key} and \val{value} see section \ref{sec:options}.
+\begin{multicols}{2}
+\begin{itemize}
+   \item \texttt{\colorbox{UOWgrey!20}{beamerthemeuow.sty}},
+   \item \texttt{\colorbox{UOWgrey!20}{beamerouterthemeuow.sty}},
+   \item \texttt{\colorbox{UOWgrey!20}{beamerinnerthemeuow.sty}},
+   \item \texttt{\colorbox{UOWgrey!20}{beamercolorthemeuow.sty}},
+   \item \texttt{\colorbox{UOWgrey!20}{beamerfontthemeuow.sty}},
+   \item \texttt{\colorbox{UOWgrey!20}{demo.tex}},
+   \item \texttt{\colorbox{UOWgrey!20}{UOW\_mono.pdf}} and
+   \item \texttt{\colorbox{UOWgrey!20}{UOW\_mono\_inverted.pdf}}.
+\end{itemize}
+\end{multicols}
+
+This theme is currently \emph{not} distributed via CTAN. It is only available via download from UOW, or you may download, clone or fork the repository on \href{https://github.com/tmgriffiths/UOW_Beamer}{Github}\footnote{\url{https://github.com/tmgriffiths/UOW_Beamer}}. Distribution by CTAN may be implemented in the future.
+\section{Package Options}\label{sec:options}
+\marginpar{\key{framnetitlenumbering}}The entire theme consists of five files, an demo and two logos (see below).
+\section{Legal}
+This work may be distributed and/or modified under the conditions of the LaTeX Project Public License version 1.3c which can be found \href{http://www.latex-project.org/lppl/lppl-1-3c.txt}{here}\footnote{\url{http://www.latex-project.org/lppl/lppl-1-3c.txt}}.
+
+The crest and associated branding of the University of Wollongong is copyright and the property of the University of Wollongong. As the core identifier of the university its use is governed by the university's brand and visual identity guidelines which can be found \href{http://www.uow.edu.au/about/brand/uowlogo/index.html}{online}\footnote{\url{http://www.uow.edu.au/about/brand/uowlogo/index.html}}
+
+This work is copyright (CC BY-NC-SA 3.0 AU) 2015 by T. M. Griffiths under the creative commons licence (attribution, non-commercial, share alike). More information can be found \href{http://creativecommons.org/licenses/by-nc-sa/3.0/au/}{here}\footnote{\url{http://creativecommons.org/licenses/by-nc-sa/3.0/au/}}.
+
+\section{Change Log}
+If you spot any errors or bugs, or alternately you have any requests for an addition let me know.
+\subsection*{Version 1.0, 2015–07–23, tmgriffiths}
+It's day dot. Nothing to added or removed. It just is.
+
+\end{document}

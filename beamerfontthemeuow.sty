@@ -1,14 +1,33 @@
+%% This is file `beamerfontthemeuow.sty',
+%% 2014-01-07 (cc) tmgriffiths Version 1.0
+%%
+%% Copyright (CC BY-NC-SA 3.0 AU) 2015 by T. M. Griffiths
+%% under the creative commons licence, attribution, non-comercial, share alike
+%% http://creativecommons.org/licenses/by-nc-sa/3.0/au/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License version 1.3c
+%% http://www.latex-project.org/lppl/lppl-1-3c.txt
+%%
+%%--------------------------------------------------------------------------------
+%% These Packages essentially port the UOW powerpoint templates over to Beamer, 
+%% a LaTeX class for presentations.
+%% 
+%% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
+%% Version 1.0 2015-07-23 tmgriffiths       
+%%----------------------------------------------------------------------------
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerfontthemeuow}
-    [2015/07/18 A Beamer Font Theme That Matches the UOW Branding Guidelines]
+    [2015/07/23 A Beamer Font Theme That Matches the UOW Branding Guidelines V 1.0 (cc) tmgriffiths]
 \RequirePackage{ifxetex}
-
+\RequirePackage{textcase}
 \ifxetex
    \RequirePackage{microtype}
 \else
    \RequirePackage[tracking=true]{microtype}
       \renewcommand*{\allcapsspacing}[1]{\textls*[50]{#1}}%
-      \renewcommand*{\allcaps}[1]{\allcapsspacing{\MakeUppercase{#1}}}%
+      \renewcommand*{\allcaps}[1]{\allcapsspacing{\MakeTextUppercase{#1}}}%
 \fi
 % Font Assignment
 \setbeamerfont*{title}{size=\huge,}
@@ -21,5 +40,8 @@
 \setbeamerfont*{subtitle}{size=\normalsize,}
 \setbeamerfont*{frametitle}{size=\Large, shape=\bfseries}
 \setbeamerfont*{alerted text}{shape=\bfseries}
+\setbeamerfont*{block title}{shape=\bfseries}
+\setbeamerfont*{block title alerted}{shape=\bfseries}
+\setbeamerfont*{enumerate item}{shape=\bfseries}
 \setbeamerfont*{caption}{size=\small, shape=\bfseries}
 \setbeamerfont*{page number in head/foot}{size=\scriptsize}
