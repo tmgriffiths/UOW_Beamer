@@ -1,5 +1,6 @@
 %!TEX TS-program = lualatex
-\documentclass[a4paper,oneside,11pt]{article}
+\RequirePackage{etex}
+\documentclass[a4paper,oneside,12pt]{article}
 \usepackage{fontspec}
    % http://tex.stackexchange.com/questions/132873/microtype-tracking-disables-small-caps-in-lualatex
    \defaultfontfeatures{SmallCapsFeatures={Renderer=Basic},}
@@ -19,12 +20,14 @@
       
 \usepackage{geometry}
    \geometry{
-      marginparsep=1.5em,
-      marginparwidth={0.25\linewidth},
-      inner=0.35\linewidth,
+      marginparsep=1em,
+      marginparwidth={0.2\linewidth},
+      %inner=0.4\linewidth,
       a4paper,
    }
 
+\usepackage{tikz}
+\usepackage{parskip}
 \usepackage{xcolor}
    % Use the UOW colour pallet
    \definecolor{UOWblack}{RGB}{0, 0, 0}
@@ -50,22 +53,15 @@
 
 \usepackage{multicol}
 \usepackage{marginfix}
+\usepackage{marginnote}
    \reversemarginpar
-   \makeatletter
-      \renewcommand{\@marginparreset}{%
-         \raggedleft
-         \reset@font\footnotesize
-         \@setminipage
-         }
-   \makeatother
-   
+
 \usepackage{pdfpages}
 \usepackage[colorlinks=true, allcolors=UOWdarkblue]{hyperref}
 
-\newcommand{\key}[1]{\textit{\texttt{\color{UOWorange}#1}}} 
-\newcommand{\val}[1]{\textit{\texttt{\color{UOWblue}#1}}} 
+\newcommand{\key}[1]{\texttt{\color{UOWorange}#1}} 
+\newcommand{\val}[1]{\texttt{\color{UOWblue}#1}} 
 \newcommand{\command}[1]{\texttt{\color{UOWdarkgreen}#1}} 
-
 
 \title{\textsf{The UOW Beamer Theme}}
 \author{Thomas M. Griffiths}
@@ -76,14 +72,14 @@
 \maketitle
 
 \section{About}
-This theme ports the UOW powerpoint templates over to Beamer, a LaTeX class for presentations. The template has been set up so that the layout for the entire presentation is selected and the slides are formatted as appropriate, individual slides cannot be themed at this stage. See section \ref{sec:options} for examples. Each layout can be coloured with the UOW Branding colours, which are available also for the user to use as colours for objects in their presentation.
+This theme ports the UOW powerpoint templates over to Beamer, a \LaTeX class for presentations. The template has been set up so that the layout for the entire presentation is selected and the slides are formatted as appropriate, individual slides cannot be themed at this stage. See section \ref{sec:options} for examples. Each layout can be coloured with the UOW Branding colours, which are available also for the user to use as colours for objects in their presentation.
 
 \section{Usage}
 The entire theme consists of five files, an demo and two logos (see below). To use the theme in your presentation simply place the files in the working directory of your latex document. In your document load the theme via:\\
 
 \command{\textbackslash{}usetheme[\key{key}=\val{value}, \key{key}=\val{value}]\{uow\}}\\
 
-\noindent Note, that the \command{\key{key}=\val{value}} entries are optional. For an explanation of each \key{key} and \val{value} see section \ref{sec:options}.
+\noindent Note, that the \command{\key{key}=\val{value}} entries are optional. For an explanation of each \key{key} and \val{value} see section \ref{sec:options}. The defaults values for the theme are \key{themecolor}=\val{blue}, \key{layout}=\val{standard} and \key{framenumbering}=\val{none}; these are what will be loaded if no options are specified with \command{\textbackslash{}usetheme\{uow\}}. For a example presentation compile \texttt{demo.tex}.
 \begin{multicols}{2}
 \begin{itemize}
    \item \texttt{\colorbox{UOWgrey!20}{beamerthemeuow.sty}},
@@ -98,8 +94,36 @@ The entire theme consists of five files, an demo and two logos (see below). To u
 \end{multicols}
 
 This theme is currently \emph{not} distributed via CTAN. It is only available via download from UOW, or you may download, clone or fork the repository on \href{https://github.com/tmgriffiths/UOW_Beamer}{Github}\footnote{\url{https://github.com/tmgriffiths/UOW_Beamer}}. Distribution by CTAN may be implemented in the future.
+
 \section{Package Options}\label{sec:options}
-\marginpar{\key{framnetitlenumbering}}The entire theme consists of five files, an demo and two logos (see below).
+\textbf{\key{themecolor}}\marginnote{\key{key}} or \textbf{\key{themecolour}}. Each of the colours outlined in the UOW brand identity guideline are available as colours for the presentation. The key themecolor (or themecolour) sets the colour of the polygons and elements in the UOW theme. These colours can be used in the document to colour any element by calling the colour, for example as an argument to \command{\textbackslash{}color\{UOWred\}}, by prefixing the name of the key with `UOW', e.g. UOWblue.
+
+\begin{multicols}{2}
+\marginnote{\val{values}} \begin{itemize}
+\item \textbf{\val{black}}: \tikz\draw[color=UOWblack, line width=1.5ex](0,0) -- (2cm,0);,
+\item \textbf{\val{gold}}: \tikz\draw[color=UOWgold, line width=1.5ex](0,0) -- (2cm,0);,
+\item \textbf{\val{yellow}} an alias for \textbf{\val{gold}}, 
+\item \textbf{\val{darkblue}}: \tikz\draw[color=UOWdarkblue, line width=1.5ex](0,0) -- (2cm,0);, 
+\item \textbf{\val{red}}: \tikz\draw[color=UOWred, line width=1.5ex](0,0) -- (2cm,0);, 
+\item \textbf{\val{blue}}: \tikz\draw[color=UOWblue, line width=1.5ex](0,0) -- (2cm,0);, 
+\item \textbf{\val{darkgreen}}: \tikz\draw[color=UOWdarkgreen, line width=1.5ex](0,0) -- (2cm,0);, 
+\item \textbf{\val{green}} an alias for \textbf{\val{darkgreen}}, 
+\item \textbf{\val{limegreen}}: \tikz\draw[color=UOWlimegreen, line width=1.5ex](0,0) -- (2cm,0);, 
+\item \textbf{\val{orange}}: \tikz\draw[color=UOWorange, line width=1.5ex](0,0) -- (2cm,0);, 
+\item \textbf{\val{darkred}}: \tikz\draw[color=UOWdarkred, line width=1.5ex](0,0) -- (2cm,0);, 
+\item \textbf{\val{pink}}: \tikz\draw[color=UOWpink, line width=1.5ex](0,0) -- (2cm,0);, 
+\item \textbf{\val{purple}}: \tikz\draw[color=UOWpurple, line width=1.5ex](0,0) -- (2cm,0);, 
+\item \textbf{\val{grey}}: \tikz\draw[color=UOWgrey, line width=1.5ex](0,0) -- (2cm,0); and
+\item \textbf{\val{gray}} an alias for \textbf{\val{grey}}.
+\end{itemize}
+\end{multicols}
+
+\textbf{\key{layout}}.\marginnote{\key{key}} In the Microsoft Power point implementation there are three main frame styles. One with solid colour for the background of the slide and a thin white polygon at the base containing the UOW brandmark. A style that is the inverse of this, a white background with coloured polygon. And a third eco style with a white background and an just the outline of the polygon at the base of the slide.
+
+The default style that is is shipped with Power Point
+
+\textbf{\key{framnetitlenumbering}}\marginnote{\key{key}} The entire theme consists of five files, an demo and two logos (see below).
+
 \section{Legal}
 This work may be distributed and/or modified under the conditions of the LaTeX Project Public License version 1.3c which can be found \href{http://www.latex-project.org/lppl/lppl-1-3c.txt}{here}\footnote{\url{http://www.latex-project.org/lppl/lppl-1-3c.txt}}.
 
