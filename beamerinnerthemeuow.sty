@@ -1,9 +1,9 @@
 %% This is file `beamerinnerthemeuow.sty',
 %% 2014-01-07 (cc) tmgriffiths Version 1.0
 %%
-%% Copyright (CC BY-NC-SA 3.0 AU) 2015 by T. M. Griffiths
+%% Copyright (CC BY-NC-SA 4.0 Int) 2015 by T. M. Griffiths
 %% under the creative commons licence, attribution, non-comercial, share alike
-%% http://creativecommons.org/licenses/by-nc-sa/3.0/au/ 
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/ 
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License version 1.3c
@@ -11,11 +11,15 @@
 %%
 %%--------------------------------------------------------------------------------
 %% These Packages essentially port the UOW powerpoint templates over to Beamer, 
-%% a LaTeX class for presentations.
+%% a LaTeX class for presentations. Inspiration for parts of this theme (where 
+%% design decision had to be made) and guidance on the implementation of the 
+%% pgfkeys were taken from the \href{https:/github.com/matze/mtheme}{metropolis
+%% theme}\footnote{\url{https:/github.com/matze/mtheme}} by Matthias Vogelgesang 
+%% et al., of which the author of this package is a direct is a contributor.
 %% 
 %% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
 %% Version 1.0 2015-07-23 tmgriffiths       
-%%----------------------------------------------------------------------------
+%%----------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerinnerthemeuow}
@@ -225,7 +229,7 @@
 \setlength{\parskip}{0.5em}
 \linespread{1.15}
 % Bullet point styles
-\setbeamertemplate{itemize items}{\textbullet}
+%\setbeamertemplate{itemize items}{\textbullet}
 % Captions
 \setbeamertemplate{caption label separator}{: }
 \setbeamertemplate{caption}[numbered]
