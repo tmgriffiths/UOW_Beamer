@@ -23,6 +23,9 @@
       marginparsep=1em,
       marginparwidth={0.2\linewidth},
       a4paper,
+      left=0.28\linewidth,
+      right=0.28\linewidth,
+      bottom=0.3\linewidth
    }
 
 \usepackage{tikz}
@@ -110,9 +113,11 @@ This theme is currently \emph{not} distributed via CTAN. It is only available vi
 \subsubsection*{\key{layout}}%
 In the Microsoft Power point implementation there are three main frame styles. One with solid colour for the background of the slide and a thin white polygon at the base containing the UOW brandmark. A style that is the inverse of this, a white background with coloured polygon. And a third eco style with a white background and an just the outline of the polygon at the base of the slide.
 
-While individual slides can't be themed at this stage there are eight layouts included in this theme. 
+While individual slides can't be themed at this stage there are eight layouts included in this theme. These eight options should encompass most sensible arrangements of slides, these options are shown below with the default blue colour.
 
-\subsubsection*{\val{standard}}% \hfill \textbf{default} \\[0.5em]
+If your presentation won't have a title page you can turn the different layout for the first page with the \key{titlepage}=\val{false} or \val{none}. The default is \val{true}.
+
+\subsubsection*{\val{standard} default}% \hfill \textbf{default} \\[0.5em]
 \fbox{\includegraphics[width=0.5\textwidth]{titleframe_standard.png}}
 \fbox{\includegraphics[width=0.5\textwidth]{contentframe_standard.png}}\par
 
@@ -144,11 +149,12 @@ While individual slides can't be themed at this stage there are eight layouts in
 \fbox{\includegraphics[width=0.5\textwidth]{titleframe_plain.png}}
 \fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
 
+
 \subsubsection*{\key{themecolor} \textit{or} \key{themecolour}}
 Each of the colours outlined in the UOW brand identity guideline are available as colours for the presentation. The key themecolor (or themecolour) sets the colour of the polygons and elements in the UOW theme. These colours can be used in the document to colour any element by calling the colour, for example as an argument to \command{\textbackslash{}color\{UOWred\}}, by prefixing the name of the key with `UOW', e.g. UOWblue.
 
 \begin{tikzpicture}[ampersand replacement=\&, every node/.style={anchor=west}] 
-\matrix (m) [row sep=0.5em, column sep=3.5em, nodes={align=left}] {%
+\matrix (m) [row sep=0.5em, column sep=2.5em, nodes={align=left}] {%
    \node[align=left] {\textbf{Key Value}}; \& %
    \node[align=left] {\textbf{Colour Name}};   \& %
    \node[align=left] {\textbf{RGB Tuple}};   
@@ -181,8 +187,22 @@ Each of the colours outlined in the UOW brand identity guideline are available a
 \end{tikzpicture}
 
 
-\key{framnetitlenumbering} The entire theme consists of five files, an demo and two logos (see below).
-\lipsum[1-2]
+\subsubsection*{\key{framnetitlenumbering}}
+You can turn on numbering of the slides with this key. The numbers are placed in the bottom right corner of the slides. It does not make much sense to use this option with the \val{standard}, \val{bold}, \val{minimaltitle} and \val{eco} layouts. I may patch this at a later date to place the slide numbers in a different location, such as the top right corner, in these cases. For now it is up to the operators discretion to use this appropriately.
+
+\subsubsection*{\val{counter}}
+A plain arabic numeral in the bottom right corner of the slide to show the slide number.
+
+\subsubsection*{\val{fraction}}
+A fraction of the page number and the total number of slides separated by a solidus: i.e 3/10.
+
+\subsubsection*{\val{none} default}
+No page numbering. This is the default option.
+
+
+\subsubsection*{\key{titlepage}}
+This turns the different background for the first slide on or off depending weather or not you're going to use a title page slide. The options are \val{true}, \val{false} and \val{none}. Each option is fairly self explanatory.
+
 
 \section{Legal}
 This work may be distributed and/or modified under the conditions of the LaTeX Project Public License version 1.3c which can be found \href{http://www.latex-project.org/lppl/lppl-1-3c.txt}{here}\footnote{\url{http://www.latex-project.org/lppl/lppl-1-3c.txt}}.
@@ -191,7 +211,8 @@ The crest and associated branding of the University of Wollongong is copyright a
 
 This work is copyright (CC BY-NC-SA 4.0 International Licence) 2015 by T. M. Griffiths under the creative commons licence (attribution, non-commercial, share alike). More information can be found \href{http://creativecommons.org/licenses/by-nc-sa/4.0/}{here}\footnote{\url{http://creativecommons.org/licenses/by-nc-sa/4.0/}}. Inspiration for parts of this theme (where design decision had to be made) and guidance on the implementation of the pgfkeys were taken from the \href{https:/github.com/matze/mtheme}{metropolis theme}\footnote{\url{https:/github.com/matze/mtheme}} by Matthias Vogelgesang \textit{et al}., of which the author is a contributor. 
 
-\begin{center}\ccbysa\end{center}
+\vspace{1em}\begin{center}\ccbysa\end{center}
+
 
 \section{Change Log}
 If you spot any errors or bugs, or alternately you have any requests for an addition let me know.
