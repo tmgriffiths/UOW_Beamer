@@ -9,7 +9,7 @@
       %Numbers=OldStyle,%
       Renderer=Basic%
       ]
-      {Tex Gyre Pagella}
+      {Minion Pro}
 
    \setsansfont[%
       Renderer=Basic%
@@ -22,7 +22,6 @@
    \geometry{
       marginparsep=1em,
       marginparwidth={0.2\linewidth},
-      %inner=0.4\linewidth,
       a4paper,
    }
 
@@ -48,10 +47,8 @@
     \titleformat{\section}
         {\color{UOWblue}\normalfont\large\sffamily}
         {\color{UOWblue}\thesection}{1em}{}
-    \titleformat{\subsection}
-        {\color{UOWred}\normalfont\sffamily}
-        {\color{UOWred}\thesection}{1em}{}
 
+\usepackage{lipsum}
 \usepackage{multicol}
 \usepackage{marginfix}
 \usepackage{marginnote}
@@ -60,6 +57,14 @@
 \usepackage{pdfpages}
 \usepackage[colorlinks=true, allcolors=UOWdarkblue]{hyperref}
 
+\newenvironment{absolutelynopagebreak}
+  {\par\nobreak\vfil\penalty0\vfilneg
+   \vtop\bgroup}
+  {\par\xdef\tpd{\the\prevdepth}\egroup
+   \prevdepth=\tpd}
+
+\setlength{\fboxsep}{0pt}%
+\setlength{\fboxrule}{1pt}%
 \newcommand{\key}[1]{\texttt{\color{UOWorange}#1}} 
 \newcommand{\val}[1]{\texttt{\color{UOWblue}#1}} 
 \newcommand{\command}[1]{\texttt{\color{UOWdarkgreen}#1}} 
@@ -73,14 +78,7 @@
 \maketitle
 
 \section{About}
-This theme ports the UOW Power Point templates over to Beamer, a \LaTeX class for presentations. The template has been set up so that the layout for the entire presentation is selected and the slides are formatted as appropriate, individual slides cannot be themed at this stage. See section \ref{sec:options} for examples. Each layout can be coloured with the UOW Branding colours, which are available also for the user to use as colours for objects in their presentation.
-
-\section{Usage}
-The entire theme consists of five files, an demo and two logos (see below). To use the theme in your presentation simply place the files in the working directory of your latex document. In your document load the theme via:\\
-
-\command{\textbackslash{}usetheme[\key{key}=\val{value}, \key{key}=\val{value}]\{uow\}}\\
-
-\noindent Note, that the \command{\key{key}=\val{value}} entries are optional. For an explanation of each \key{key} and \val{value} see section \ref{sec:options}. The defaults values for the theme are \key{themecolor}=\val{blue}, \key{layout}=\val{standard} and \key{framenumbering}=\val{none}; these are what will be loaded if no options are specified with \command{\textbackslash{}usetheme\{uow\}}. For a example presentation compile \texttt{demo.tex}.
+This theme ports the UOW Power Point templates over to Beamer, a \LaTeX class for presentations. The template has been set up so that the layout for the entire presentation is selected and the slides are formatted as appropriate, individual slides cannot be themed at this stage. See section \ref{sec:options} for examples. Each layout can be coloured with the UOW Branding colours, which are available also for the user to use as colours for objects in their presentation. The entire theme consists of eight files in total: five files, a demo and two logos. 
 \begin{multicols}{2}
 \begin{itemize}
    \item \texttt{\colorbox{UOWgrey!20}{beamerthemeuow.sty}},
@@ -94,43 +92,104 @@ The entire theme consists of five files, an demo and two logos (see below). To u
 \end{itemize}
 \end{multicols}
 
+The author maintains the code for this Beamer theme on \href{https://github.com/tmgriffiths/UOW_Beamer}{GitHub.} If you have any comments or suggestions please get in touch there.
+
+\section{Usage}
+To use the theme in your presentation simply place the files in the working directory of your latex document. In your document load the theme via:\\
+
+\command{\textbackslash{}documentclass\{beamer\}}\\
+\command{\textbackslash{}usetheme[\key{key}=\val{value}, \key{key}=\val{value}]\{uow\}}\\
+
+Note, that the \command{\key{key}=\val{value}} entries are optional. For an explanation of each \key{key} and \val{value} see section \ref{sec:options}. The defaults values for the theme are \key{themecolor}=\val{blue}, \key{layout}=\val{standard} and \key{framenumbering}=\val{none}; these are what will be loaded if no options are specified with \command{\textbackslash{}usetheme\{uow\}}. 
+
+All the standard options for a beamer class; aspect ratio, fontsize etc. are still available. To get the two slide ratios offered by the UOW Power Point theme use the following options for the \emph{document class}: \key{aspectratio}=\val{43} for a 4:3 aspect ratio, and \key{aspectratio}=\val{169} for a 16:9 aspect ratio. For a example presentation compile \texttt{demo.tex}.
+
 This theme is currently \emph{not} distributed via CTAN. It is only available via download from UOW, or you may download, clone or fork the repository on \href{https://github.com/tmgriffiths/UOW_Beamer}{Github}\footnote{\url{https://github.com/tmgriffiths/UOW_Beamer}}. Distribution by CTAN may be implemented in the future.
 
 \section{Package Options}\label{sec:options}
-\textbf{\key{themecolor}}\marginnote{\key{key}} or \textbf{\key{themecolour}}. Each of the colours outlined in the UOW brand identity guideline are available as colours for the presentation. The key themecolor (or themecolour) sets the colour of the polygons and elements in the UOW theme. These colours can be used in the document to colour any element by calling the colour, for example as an argument to \command{\textbackslash{}color\{UOWred\}}, by prefixing the name of the key with `UOW', e.g. UOWblue.
+\subsubsection*{\key{layout}}%
+In the Microsoft Power point implementation there are three main frame styles. One with solid colour for the background of the slide and a thin white polygon at the base containing the UOW brandmark. A style that is the inverse of this, a white background with coloured polygon. And a third eco style with a white background and an just the outline of the polygon at the base of the slide.
 
-\begin{multicols}{2}
-\marginnote{\val{values}} \begin{itemize}
-\item \textbf{\val{black}}: \tikz\draw[color=UOWblack, line width=1.5ex](0,0) -- (2cm,0);,
-\item \textbf{\val{gold}}: \tikz\draw[color=UOWgold, line width=1.5ex](0,0) -- (2cm,0);,
-\item \textbf{\val{yellow}} an alias for \textbf{\val{gold}}, 
-\item \textbf{\val{darkblue}}: \tikz\draw[color=UOWdarkblue, line width=1.5ex](0,0) -- (2cm,0);, 
-\item \textbf{\val{red}}: \tikz\draw[color=UOWred, line width=1.5ex](0,0) -- (2cm,0);, 
-\item \textbf{\val{blue}}: \tikz\draw[color=UOWblue, line width=1.5ex](0,0) -- (2cm,0);, 
-\item \textbf{\val{darkgreen}}: \tikz\draw[color=UOWdarkgreen, line width=1.5ex](0,0) -- (2cm,0);, 
-\item \textbf{\val{green}} an alias for \textbf{\val{darkgreen}}, 
-\item \textbf{\val{limegreen}}: \tikz\draw[color=UOWlimegreen, line width=1.5ex](0,0) -- (2cm,0);, 
-\item \textbf{\val{orange}}: \tikz\draw[color=UOWorange, line width=1.5ex](0,0) -- (2cm,0);, 
-\item \textbf{\val{darkred}}: \tikz\draw[color=UOWdarkred, line width=1.5ex](0,0) -- (2cm,0);, 
-\item \textbf{\val{pink}}: \tikz\draw[color=UOWpink, line width=1.5ex](0,0) -- (2cm,0);, 
-\item \textbf{\val{purple}}: \tikz\draw[color=UOWpurple, line width=1.5ex](0,0) -- (2cm,0);, 
-\item \textbf{\val{grey}}: \tikz\draw[color=UOWgrey, line width=1.5ex](0,0) -- (2cm,0); and
-\item \textbf{\val{gray}} an alias for \textbf{\val{grey}}.
-\end{itemize}
-\end{multicols}
+While individual slides can't be themed at this stage there are eight layouts included in this theme. 
 
-\textbf{\key{layout}}.\marginnote{\key{key}} In the Microsoft Power point implementation there are three main frame styles. One with solid colour for the background of the slide and a thin white polygon at the base containing the UOW brandmark. A style that is the inverse of this, a white background with coloured polygon. And a third eco style with a white background and an just the outline of the polygon at the base of the slide.
+\subsubsection*{\val{standard}}% \hfill \textbf{default} \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_standard.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_standard.png}}\par
 
-The default style that is is shipped with Power Point
+\subsubsection*{\val{minimaltitle}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_minimal.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_standard.png}}\par
 
-\textbf{\key{framnetitlenumbering}}\marginnote{\key{key}} The entire theme consists of five files, an demo and two logos (see below).
+\subsubsection*{\val{minimal}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_minimal.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
+
+\subsubsection*{\val{bold}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_standard.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_bold.png}}\par
+
+\subsubsection*{\val{boldplain}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_standard.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
+
+\subsubsection*{\val{eco}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_eco.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_eco.png}}\par
+
+\subsubsection*{\val{ecominimal}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_eco.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
+
+\subsubsection*{\val{plain}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_plain.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
+
+\subsubsection*{\key{themecolor} \textit{or} \key{themecolour}}
+Each of the colours outlined in the UOW brand identity guideline are available as colours for the presentation. The key themecolor (or themecolour) sets the colour of the polygons and elements in the UOW theme. These colours can be used in the document to colour any element by calling the colour, for example as an argument to \command{\textbackslash{}color\{UOWred\}}, by prefixing the name of the key with `UOW', e.g. UOWblue.
+
+\begin{tikzpicture}[ampersand replacement=\&, every node/.style={anchor=west}] 
+\matrix (m) [row sep=0.5em, column sep=3.5em, nodes={align=left}] {%
+   \node[align=left] {\textbf{Key Value}}; \& %
+   \node[align=left] {\textbf{Colour Name}};   \& %
+   \node[align=left] {\textbf{RGB Tuple}};   
+   \& \draw [line width=0.4pt, color=UOWblack] (0,0)  circle (0.7em); \\ %
+   \node[align=left] {\val{black}};     \& \node[align=left] {UOWblack};     \& \node {0, 0, 0};      %
+   \& \fill [line width=1em, color=UOWblack] (0,0)  circle (0.7em); \\
+   \node[align=left] {\val{grey} \textit{or} \val{gray}};      \& \node[align=left] {UOWgrey};      \& \node {69, 85, 95};   %
+   \& \fill [line width=1em, color=UOWgrey] (0,0)  circle (0.7em); \\
+   \node[align=left] {\val{darkred}};   \& \node[align=left] {UOWdarkred};   \& \node {195, 18, 48};  %
+   \& \fill [line width=1em, color=UOWdarkred] (0,0)  circle (0.7em); \\
+   \node[align=left] {\val{red}};       \& \node[align=left] {UOWred};       \& \node {238, 64, 52};  %
+   \& \fill [line width=1em, color=UOWred] (0,0)  circle (0.7em); \\
+   \node[align=left] {\val{pink}};      \& \node[align=left] {UOWpink};      \& \node {238 ,0, 139};  %
+   \& \fill [line width=1em, color=UOWpink] (0,0)  circle (0.7em); \\
+   \node[align=left] {\val{orange}};    \& \node[align=left] {UOWorange};    \& \node {243, 121, 32}; %
+   \& \fill [line width=1em, color=UOWorange] (0,0)  circle (0.7em); \\
+   \node[align=left] {\val{gold} \textit{or} \val{yellow}};      \& \node[align=left] {UOWgold};      \& \node {253, 184, 19}; %
+   \& \fill [line width=1em, color=UOWgold] (0,0)  circle (0.7em); \\
+   \node[align=left] {\val{limegreen}}; \& \node[align=left] {UOWlimegreen}; \& \node {183, 198, 38}; %
+   \& \fill [line width=1em, color=UOWlimegreen] (0,0)  circle (0.7em); \\
+   \node[align=left] {\val{darkgreen} \textit{or} \val{green}}; \& \node[align=left] {UOWdarkgreen}; \& \node {0, 146, 94};   %
+   \& \fill [line width=1em, color=UOWdarkgreen] (0,0)  circle (0.7em); \\
+   \node[align=left] {\val{blue} (\textbf{default})};      \& \node[align=left] {UOWblue};      \& \node {0, 149, 214};  %
+   \& \fill [line width=1em, color=UOWblue] (0,0)  circle (0.7em); \\
+   \node[align=left] {\val{darkblue}};  \& \node[align=left] {UOWdarkblue};  \& \node {0, 83, 154};   %
+   \& \fill [line width=1em, color=UOWdarkblue] (0,0)  circle (0.7em); \\
+   \node[align=left] {\val{purple}};    \& \node[align=left] {UOWpurple};    \& \node {74, 47, 142};  %
+   \& \fill [line width=1em, color=UOWpurple] (0,0)  circle (0.7em); \\
+};
+\end{tikzpicture}
+
+
+\key{framnetitlenumbering} The entire theme consists of five files, an demo and two logos (see below).
+\lipsum[1-2]
 
 \section{Legal}
 This work may be distributed and/or modified under the conditions of the LaTeX Project Public License version 1.3c which can be found \href{http://www.latex-project.org/lppl/lppl-1-3c.txt}{here}\footnote{\url{http://www.latex-project.org/lppl/lppl-1-3c.txt}}.
 
 The crest and associated branding of the University of Wollongong is copyright and the property of the University of Wollongong. As the core identifier of the university its use is governed by the university's brand and visual identity guidelines which can be found \href{http://www.uow.edu.au/about/brand/uowlogo/index.html}{online}\footnote{\url{http://www.uow.edu.au/about/brand/uowlogo/index.html}}
 
-This work is copyright (CC BY-NC-SA 4.0 International Licence) 2015 by T. M. Griffiths under the creative commons licence (attribution, non-commercial, share alike). More information can be found \href{http://creativecommons.org/licenses/by-nc-sa/4.0/}{here}\footnote{\url{http://creativecommons.org/licenses/by-nc-sa/4.0/}}. Inspiration for parts of this theme and guidance on the implementation of the pgfkeys were taken from the \href{https:/github.com/matze/mtheme}{metropolis theme}\footnote{\url{https:/github.com/matze/mtheme}} by Matthias Vogelgesang \textit{et al}., of which the author is a contributor. 
+This work is copyright (CC BY-NC-SA 4.0 International Licence) 2015 by T. M. Griffiths under the creative commons licence (attribution, non-commercial, share alike). More information can be found \href{http://creativecommons.org/licenses/by-nc-sa/4.0/}{here}\footnote{\url{http://creativecommons.org/licenses/by-nc-sa/4.0/}}. Inspiration for parts of this theme (where design decision had to be made) and guidance on the implementation of the pgfkeys were taken from the \href{https:/github.com/matze/mtheme}{metropolis theme}\footnote{\url{https:/github.com/matze/mtheme}} by Matthias Vogelgesang \textit{et al}., of which the author is a contributor. 
 
 \begin{center}\ccbysa\end{center}
 

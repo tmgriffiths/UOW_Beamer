@@ -13,13 +13,12 @@
 %% These Packages essentially port the UOW powerpoint templates over to Beamer, 
 %% a LaTeX class for presentations. Inspiration for parts of this theme (where 
 %% design decision had to be made) and guidance on the implementation of the 
-%% pgfkeys were taken from the \href{https:/github.com/matze/mtheme}{metropolis
-%% theme}\footnote{\url{https:/github.com/matze/mtheme}} by Matthias Vogelgesang 
-%% et al., of which the author of this package is a direct is a contributor.
+%% pgfkeys were taken from the metropolis by Matthias Vogelgesang et al., of which 
+%% the author of this package is a direct is a contributor.
 %% 
 %% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
 %% Version 1.0 2015-07-23 tmgriffiths       
-%%----------------------------------------------
+%%--------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerouterthemeuow}
@@ -30,6 +29,14 @@
 \RequirePackage{calc}
 \RequirePackage{xparse}
 \RequirePackage{etoolbox}
+
+\newcommand{\@UOWtheme@outer@defaults}{
+   \pgfkeys{/UOWtheme/outer/.cd,
+      layout=standard,
+      framenumbering=none,
+      titlepage=true,
+   }
+}
 
 % Detection of aspect ration in order to pass on details for various aspect ratios
 % See answer to http://tex.stackexchange.com/questions/123106/detect-aspect-ratio-in-beamer
@@ -108,7 +115,24 @@
    }
 }
 
-\defbeamertemplate{background}{bold}{%
+% Boolean for turning title page on and off.
+\newtoggle{titlepage}
+\pgfkeys{%
+   /UOWtheme/outer/titlepage/.cd,
+      .is choice,
+      false/.code={%
+         \togglefalse{titlepage}%
+         },
+      true/.code={%
+         \toggletrue{titlepage}%
+         },
+      none/.code={%
+         \togglefalse{titlepage}%
+      },
+}
+
+% Backgrounds
+\newcommand{\@UOWtheme@boldbackground}{
    \begin{tikzpicture}[overlay]
       \filldraw[color=\@UOWtheme@color,]
          (0,0) 
@@ -127,65 +151,7 @@
    \end{tikzpicture}
 }
 
-\defbeamertemplate{background}{UOWdefault}{
-   \ifnum\c@framenumber=1%
-      \begin{tikzpicture}[overlay]
-         \filldraw[color=\@UOWtheme@color,]
-            (0,0) 
-            rectangle (\the\paperwidth, -\the\paperheight);
-         \filldraw[color=white,]
-            (0,-\the\paperheight+\@UOWsmallrectangle@height) 
-            rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
-         \filldraw[color=white,]
-            (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
-            rectangle (\the\paperwidth, -\the\paperheight)
-            [path picture={
-            \node at (path picture bounding box.center) {
-            \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
-            };}
-            ];
-      \end{tikzpicture}
-   \else%
-      \begin{tikzpicture}[overlay]
-         \filldraw[color=\@UOWtheme@color,]
-            (0,-\the\paperheight+\@UOWsmallrectangle@height) 
-            rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
-         \filldraw[color=\@UOWtheme@color,]
-            (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
-            rectangle (\the\paperwidth, -\the\paperheight)
-            [path picture={
-            \node at (path picture bounding box.center) {
-            \includegraphics[width=\@UOWlogo@width]{UOW_mono_inverted.pdf}
-            };}
-            ];
-      \end{tikzpicture}
-   \fi%
-}
-
-\defbeamertemplate{background}{bold plain}{
-   \ifnum\c@framenumber=1%
-      \begin{tikzpicture}[overlay]
-         \filldraw[color=\@UOWtheme@color,]
-            (0,0) 
-            rectangle (\the\paperwidth, -\the\paperheight);
-         \filldraw[color=white,]
-            (0,-\the\paperheight+\@UOWsmallrectangle@height) 
-            rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
-         \filldraw[color=white,]
-            (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
-            rectangle (\the\paperwidth, -\the\paperheight)
-            [path picture={
-            \node at (path picture bounding box.center) {
-            \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
-            };}
-            ];
-      \end{tikzpicture}
-   \else%
-      %
-   \fi%
-}
-
-\defbeamertemplate{background}{minimal title}{
+\newcommand{\@UOWtheme@minimalbackground}{
    \begin{tikzpicture}[overlay]
       \filldraw[color=\@UOWtheme@color,]
          (0,-\the\paperheight+\@UOWsmallrectangle@height) 
@@ -201,24 +167,73 @@
    \end{tikzpicture}
 }
 
+\newcommand{\@UOWtheme@ecobackground}{
+   \begin{tikzpicture}[overlay]
+      \draw[color=white,]
+         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+         rectangle (\the\paperwidth, -\the\paperheight)
+         [path picture={
+         \node at (path picture bounding box.center) {
+         \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
+         };}
+         ];
+         \draw[thick, color=UOWblack,] 
+         (0,-\the\paperheight+\@UOWsmallrectangle@height) --
+         (\@UOWsmallrectangle@width, -\the\paperheight+0.5*\the\@UOWlargerectangle@height) -- 
+         (\@UOWsmallrectangle@width,-\the\paperheight+\the\@UOWlargerectangle@height) --
+         (\the\paperwidth,-\the\paperheight+\@UOWlargerectangle@height);
+   \end{tikzpicture}
+}
+
+\defbeamertemplate{background}{bold}{%
+   \@UOWtheme@boldbackground
+}
+
+\defbeamertemplate{background}{UOWdefault}{
+   \iftoggle{titlepage}{%
+      % true
+      \ifnum\c@framenumber=1%
+         \@UOWtheme@boldbackground
+      \else%
+         \@UOWtheme@minimalbackground
+      \fi%
+   }%
+   {%
+      % false
+      \@UOWtheme@minimalbackground
+   }
+}
+
+\defbeamertemplate{background}{bold plain}{
+   \iftoggle{titlepage}{%
+      % true
+      \ifnum\c@framenumber=1%
+         \@UOWtheme@boldbackground
+      \else%
+         %
+      \fi%
+   }%
+   {%
+      % false
+   }
+}
+
+\defbeamertemplate{background}{minimal title}{
+   \@UOWtheme@minimalbackground
+}
+
 \defbeamertemplate{background}{minimal}{%
-   \ifnum\c@framenumber=1%
-      \begin{tikzpicture}[overlay]
-         \filldraw[color=\@UOWtheme@color,]
-            (0,-\the\paperheight+\@UOWsmallrectangle@height) 
-            rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
-         \filldraw[color=\@UOWtheme@color,]
-            (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
-            rectangle (\the\paperwidth, -\the\paperheight)
-            [path picture={
-            \node at (path picture bounding box.center) {
-            \includegraphics[width=\@UOWlogo@width]{UOW_mono_inverted.pdf}
-            };}
-            ];
-      \end{tikzpicture}
-   \else%
-      %
-   \fi%
+   \iftoggle{titlepage}{%
+      % true
+      \ifnum\c@framenumber=1%
+         \@UOWtheme@minimalbackground
+      \else%
+         %
+      \fi%
+   }%
+   {%
+      % false
+   }
 }
 
 \defbeamertemplate{background}{UOWplain}{%
@@ -226,43 +241,21 @@
 }
 
 \defbeamertemplate{background}{eco}{%
-   \begin{tikzpicture}[overlay]
-      \draw[color=white,]
-         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
-         rectangle (\the\paperwidth, -\the\paperheight)
-         [path picture={
-         \node at (path picture bounding box.center) {
-         \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
-         };}
-         ];
-         \draw[thick, color=\@UOWtheme@color,] 
-         (0,-\the\paperheight+\@UOWsmallrectangle@height) --
-         (\@UOWsmallrectangle@width, -\the\paperheight+0.5+\@UOWsmallrectangle@height) -- 
-         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) --
-         (\the\paperwidth,-\the\paperheight+\@UOWlargerectangle@height);
-   \end{tikzpicture}
+   \@UOWtheme@ecobackground
 }
 
 \defbeamertemplate{background}{ecominimal}{%
-   \ifnum\c@framenumber=1%
-   \begin{tikzpicture}[overlay]
-      \draw[color=white,]
-         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
-         rectangle (\the\paperwidth, -\the\paperheight)
-         [path picture={
-         \node at (path picture bounding box.center) {
-         \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
-         };}
-         ];
-         \draw[thick, color=\@UOWtheme@color,] 
-         (0,-\the\paperheight+\@UOWsmallrectangle@height) --
-         (\@UOWsmallrectangle@width, -\the\paperheight+0.5*\the\@UOWlargerectangle@height) -- 
-         (\@UOWsmallrectangle@width,-\the\paperheight+\the\@UOWlargerectangle@height) --
-         (\the\paperwidth,-\the\paperheight+\@UOWlargerectangle@height);
-   \end{tikzpicture}
-   \else%
-      %
-   \fi%
+   \iftoggle{titlepage}{%
+      % true
+      \ifnum\c@framenumber=1%
+         \@UOWtheme@ecobackground
+      \else%
+         %
+      \fi%
+   }%
+   {%
+      % false
+   }
 }
 
 \newcommand{\@UOWtheme@framenumberseperator}{/}
@@ -280,13 +273,6 @@
    \else
    \insertframenumber\@UOWtheme@framenumberseperator\inserttotalframenumber
    \fi
-}
-
-\newcommand{\@UOWtheme@outer@defaults}{
-   \pgfkeys{/UOWtheme/outer/.cd,
-      layout=standard,
-      framenumbering=none,
-   }
 }
 
 \newcommand{\@UOWtheme@framenumberfootline}{%
