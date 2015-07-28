@@ -131,38 +131,65 @@
    
 % Blocks.
 
+% Blocks
+
 % Regular block environment
-%\setbeamertemplate{block begin}{%
-%   \begin{beamercolorbox}[%
-%      ht=2.4ex,
-%      dp=1ex,
-%      leftskip=1ex,
-%      rightskip=1ex
-%      ]%
-%      %{block title}
-%   \usebeamerfont*{block title}%
-%   \ifxetex%
-%      \MakeTextUppercase{\insertblocktitle}%
-%   \else%
-%      \allcaps{\insertblocktitle}%
-%   \fi%
-%   \end{beamercolorbox}%
-%   \vspace*{-1pt}
-%   \usebeamerfont{block body}%
-%   \begin{beamercolorbox}[%
-%      ht=2.4ex,
-%      dp=1ex,
-%      leftskip=1ex,
-%      rightskip=1ex
-%      ]%
-%      {block body}%
-%}
-%\setbeamertemplate{block end}{%
-%  \end{beamercolorbox}
-%  \vspace*{0.2ex}
-%}
-%
+\setbeamertemplate{block begin}{%
+  \vspace*{1ex}
+  \begin{beamercolorbox}[%
+    ht=2.4ex,
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,%
+    ]{block title}
+      \usebeamerfont*{block title}%
+      \ifxetex%
+         \MakeTextUppercase{\insertblocktitle}%
+      \else%
+         \allcaps{\insertblocktitle}%
+      \fi%
+  \end{beamercolorbox}%
+  \vspace*{-1pt}
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[%
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,
+    vmode]{block body}%
+}
+\setbeamertemplate{block end}{%
+  \end{beamercolorbox}
+  \vspace*{0.2ex}
+}
+
 %% Alerted block environment
+\setbeamertemplate{block begin alerted}{%
+  \vspace*{1ex}
+  \begin{beamercolorbox}[%
+    ht=2.4ex,
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,%
+    ]{block title alerted}
+      \usebeamerfont*{block title}%
+      \ifxetex%
+         \MakeTextUppercase{\insertblocktitle}%
+      \else%
+         \allcaps{\insertblocktitle}%
+      \fi%
+  \end{beamercolorbox}%
+  \vspace*{-1pt}
+  \usebeamerfont{block body alerted}%
+  \begin{beamercolorbox}[%
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,
+    vmode]{block body}%
+}
+\setbeamertemplate{block end alerted}{%
+  \end{beamercolorbox}
+  \vspace*{0.2ex}
+}
 %\setbeamertemplate{block alerted begin}{%
 %   \begin{beamercolorbox}[%
 %      ht=2.4ex,
@@ -236,6 +263,7 @@
 \setbeamertemplate{footnote}{%
    \parindent 0em\noindent%
    \raggedright
+   \scriptsize
    \usebeamercolor{footnote}\hbox to 0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
 }
 

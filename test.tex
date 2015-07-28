@@ -1,4 +1,4 @@
-\documentclass[aspectratio=1610]{beamer}
+\documentclass[aspectratio=32]{beamer}
 \usepackage[scale=2.5]{ccicons}
 \usepackage{tikz}
    \usetikzlibrary{matrix}
@@ -15,6 +15,7 @@
 \date{}
 
 \usetheme[]{uow}
+%\usetheme{Madrid}
 
 \begin{document}
 
@@ -33,7 +34,7 @@ The theme provides sensible defaults to \emph{emphasize} text, \alert{accent} pa
 
 \begin{frame}
    \frametitle{Columns, Lists and Images}
-   \begin{columns}[T]
+   \begin{columns}
       \begin{column}{0.5\textwidth}
          \begin{enumerate}
             \item Imidazopyrazinone backbone (in red).
@@ -68,6 +69,7 @@ The theme provides sensible defaults to \emph{emphasize} text, \alert{accent} pa
 %
 %
 \begin{frame}
+\frametitle{Blocks}
    \begin{block}{Blocks are Used for Emphasis in Beamer}
       Anything can go in a block.
       \begin{itemize}
@@ -80,22 +82,26 @@ The theme provides sensible defaults to \emph{emphasize} text, \alert{accent} pa
 
 
 \begin{frame}
+\frametitle{More Blocks}
    \begin{alertblock}{This is an Alert Block}
       Alert blocks are usually used for some key point to be highlighted in a talk.
       An chemical reaction for example:
-      \ch{CH4 + 2 O2 -> 2 H20 + CO2}
+      \begin{equation}
+         \ch{CH4 + 2 O2 -> 2 H2O + CO2}
+      \end{equation}
    \end{alertblock}
 \end{frame}
 
 
 \begin{frame}
+\frametitle{Even More Blocks}
    \begin{exampleblock}{This is an Example Block}
       The example block is usually used for examples. Here I find the solutions to a quadratic equation.
-      \begin{align}
-         2x^2 + 2x - 4 = 0\\
-         x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\
-         x=-2,1
-      \end{align}
+      \begin{align*}
+         2x^2 + 2x - 4 & = 0 \\
+         x & =\frac{-b\pm\sqrt{b^2-4ac}}{2a} \\
+         x & =-2 \text{ or } 1
+      \end{align*}
    \end{exampleblock}
 \end{frame}
 

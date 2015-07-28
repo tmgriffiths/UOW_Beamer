@@ -48,17 +48,17 @@
       .is choice,
       eco/.code={%
         \renewcommand*{\@UOWtheme@color}{UOWblack}
-        \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
+        \renewcommand{\@UOWtheme@alertcolor}{UOWred}
         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       black/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWblack}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
          \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       gold/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWgold}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWdarkblue}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWdarkred}
          \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       yellow/.code={%
@@ -66,22 +66,22 @@
       },
       darkblue/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWdarkblue}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
          \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       red/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWred}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWdarkblue}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
          \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       blue/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWblue}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
          \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       darkgreen/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWdarkgreen}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
          \renewcommand{\@UOWtheme@examplecolor}{UOWblue}
       },
       green/.code={%
@@ -89,32 +89,32 @@
       },
       limegreen/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWlimegreen}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
          \renewcommand{\@UOWtheme@examplecolor}{UOWblue}
       },
       orange/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWorange}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWdarkblue}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWdarkred}
          \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       darkred/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWdarkred}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWdarkblue}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
          \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       pink/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWpink}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
          \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       purple/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWpurple}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
          \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       grey/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWgrey}
-         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
          \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       gray/.code={%
@@ -206,13 +206,23 @@
    }
    \setbeamercolor*{block title alerted}{%
       use={block title, alerted text},
+      fg=\@UOWtheme@alertcolor,
       bg=white,
-      fg=alerted text.fg
+   }
+   \setbeamercolor*{block body alerted}{
+      use={block title, normal text},
+      bg=\@UOWtheme@alertcolor!30,
+      fg=black,
    }
    \setbeamercolor*{block title example}{%
       use={block title, example text},
+      fg=\@UOWtheme@examplecolor,
       bg=white,
-      fg=example text.fg,
+   }
+   \setbeamercolor*{block body example}{
+      use={block title, normal text},
+      bg=\@UOWtheme@examplecolor!30,
+      fg=black,
    }
 }
 
@@ -229,13 +239,23 @@
    }
    \setbeamercolor*{block title alerted}{%
       use={block title, alerted text},
-      %bg=\@UOWtheme@color,
-      fg=alerted text.fg,
+      bg=\@UOWtheme@alertcolor,
+      fg=white,
+   }
+   \setbeamercolor*{block body alerted}{
+      use={block title, normal text},
+      bg=\@UOWtheme@alertcolor!30,
+      fg=black,
    }
    \setbeamercolor*{block title example}{%
       use={block title, example text},
-      %bg=\@UOWtheme@color,
-      fg=example text.fg,
+      bg=\@UOWtheme@examplecolor,
+      fg=white,
+   }
+   \setbeamercolor*{block body example}{
+      use={block title, normal text},
+      bg=\@UOWtheme@examplecolor!30,
+      fg=black,
    }
 }
 
