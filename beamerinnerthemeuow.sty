@@ -135,7 +135,6 @@
 
 % Regular block environment
 \setbeamertemplate{block begin}{%
-  \vspace*{1ex}
   \begin{beamercolorbox}[%
     ht=2.4ex,
     dp=1ex,
@@ -156,100 +155,65 @@
     leftskip=1ex,
     rightskip=1ex,
     vmode]{block body}%
-}
+}%
 \setbeamertemplate{block end}{%
-  \end{beamercolorbox}
-  \vspace*{0.2ex}
-}
+  \end{beamercolorbox}%
+  %\vspace*{0.2ex}%
+}%
 
-%% Alerted block environment
-\setbeamertemplate{block begin alerted}{%
-  \vspace*{1ex}
+% Alerted block environment
+\setbeamertemplate{block alerted begin}{%
   \begin{beamercolorbox}[%
     ht=2.4ex,
     dp=1ex,
     leftskip=1ex,
     rightskip=1ex,%
-    ]{block title alerted}
-      \usebeamerfont*{block title}%
-      \ifxetex%
-         \MakeTextUppercase{\insertblocktitle}%
-      \else%
-         \allcaps{\insertblocktitle}%
-      \fi%
+    ]{block title alerted}%
+    \usebeamerfont*{block title alerted}%
+    \ifxetex%
+       \MakeTextUppercase{\insertblocktitle}%
+    \else%
+       \allcaps{\insertblocktitle}%
+    \fi%
   \end{beamercolorbox}%
   \vspace*{-1pt}
-  \usebeamerfont{block body alerted}%
   \begin{beamercolorbox}[%
     dp=1ex,
     leftskip=1ex,
     rightskip=1ex,
-    vmode]{block body}%
-}
-\setbeamertemplate{block end alerted}{%
-  \end{beamercolorbox}
-  \vspace*{0.2ex}
-}
-%\setbeamertemplate{block alerted begin}{%
-%   \begin{beamercolorbox}[%
-%      ht=2.4ex,
-%      dp=1ex,
-%      leftskip=1ex,
-%      rightskip=1ex
-%      ]%
-%      {block title alerted}
-%      \usebeamerfont*{block title alerted}%
-%      \ifxetex%
-%         \MakeTextUppercase{\insertblocktitle}%
-%      \else%
-%         \allcaps{\insertblocktitle}%
-%      \fi%
-%   \end{beamercolorbox}%
-%   \vspace*{-1pt}
-%   \usebeamerfont{block body alerted}%
-%   \begin{beamercolorbox}[%
-%      ht=2.4ex,
-%      dp=1ex,
-%      leftskip=1ex,
-%      rightskip=1ex
-%      ]%
-%      {block body}%
-%}
-%\setbeamertemplate{block alerted end}{%
-%  \end{beamercolorbox}
-%  \vspace*{0.2ex}
-%}
-%
-%% Example block environment
-%\setbeamertemplate{block example begin}{%
-%   \begin{beamercolorbox}[%
-%      ht=2.4ex,
-%      dp=1ex,
-%      leftskip=1ex,
-%      rightskip=1ex
-%      ]%
-%      {block title example}
-%      \usebeamerfont*{block title example}%
-%      \ifxetex%
-%         \MakeTextUppercase{\insertblocktitle}%
-%      \else%
-%         \allcaps{\insertblocktitle}%
-%      \fi%
-%   \end{beamercolorbox}%
-%   \vspace*{-1pt}
-%   \usebeamerfont{block body example}%
-%   \begin{beamercolorbox}[%
-%      ht=2.4ex,
-%      dp=1ex,
-%      leftskip=1ex,
-%      rightskip=1ex
-%      ]%
-%   {block body}%
-%}
-%\setbeamertemplate{block example end}{%
-%  \end{beamercolorbox}
-%  \vspace*{0.2ex}
-%}
+    vmode]{block body alerted}%
+  }
+\setbeamertemplate{block alerted end}{%
+  \end{beamercolorbox}%
+  %\vspace*{0.2ex}%
+  }
+
+% Example block environment
+\setbeamertemplate{block example begin}{%
+  \begin{beamercolorbox}[%
+    ht=2.4ex,
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,%
+    ]{block title example}%
+    \usebeamerfont*{block title example}%
+    \ifxetex%
+       \MakeTextUppercase{\insertblocktitle}%
+    \else%
+       \allcaps{\insertblocktitle}%
+    \fi%
+  \end{beamercolorbox}%
+  \vspace*{-1pt}
+  \begin{beamercolorbox}[%
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,
+    vmode]{block body example}%
+  }
+\setbeamertemplate{block example end}{%
+   \end{beamercolorbox}%
+   %\vspace*{0.2ex}%
+   }
 
 % Textblock settings
 \setlength{\parskip}{0.5em}

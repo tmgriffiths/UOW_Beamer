@@ -64,7 +64,7 @@
 \cs_new_eq:NN \str_case_x:nnn \str_case_x:nnF
 \cs_new_eq:NN \int_case:nnn \int_case:nnF
 % FIX FOR BUGGY LATEX3 KERNEL UPDATE REMOVE ONCE UPDATED!
-
+%
 % Generate the variants we need
 \cs_generate_variant:Nn \keys_set:nn { nf }
 \cs_generate_variant:Nn \str_if_eq:nnTF { nV }
@@ -353,6 +353,9 @@
 
 % No navigation symbols in the bottom corner
 \setbeamertemplate{navigation symbols}{}
+
+
+\addtobeamertemplate{footnote}{\hsize\@UOWsmallrectangle@width}{}
 
 \@UOWtheme@outer@defaults
 \ProcessPgfPackageOptions{/UOWtheme/outer}
