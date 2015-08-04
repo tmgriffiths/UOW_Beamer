@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 \mode<presentation>
 
 \setbeamertemplate{background}{
@@ -36,3 +37,239 @@
 
 \mode
 <all>
+=======
+%% This is file `beamerinnerthemeuow.sty',
+%% 2014-01-07 (cc) tmgriffiths Version 1.0
+%%
+%% Copyright (CC BY-NC-SA 4.0 Int) 2015 by T. M. Griffiths
+%% under the creative commons licence, attribution, non-comercial, share alike
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License version 1.3c
+%% http://www.latex-project.org/lppl/lppl-1-3c.txt
+%%
+%%--------------------------------------------------------------------------------
+%% These Packages essentially port the UOW powerpoint templates over to Beamer, 
+%% a LaTeX class for presentations. Inspiration for parts of this theme (where 
+%% design decision had to be made) and guidance on the implementation of the 
+%% pgfkeys were taken from the metropolis by Matthias Vogelgesang et al., of which 
+%% the author of this package is a direct is a contributor.
+%% 
+%% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
+%% Version 1.0 2015-07-23 tmgriffiths       
+%%--------------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeuow}
+   [2015/07/23 A Beamer Inner Theme That Matches the UOW Branding Guidelines V 1.0 (cc) tmgriffiths]
+\RequirePackage{calc}
+\RequirePackage{textcase}
+\ifxetex
+   \RequirePackage{microtype}
+\else
+   \RequirePackage[tracking=true]{microtype}
+      \newcommand{\allcapsspacing}[1]{\textls*[50]{#1}}%
+      \newcommand{\allcaps}[1]{\allcapsspacing{\MakeTextUppercase{#1}}}%
+\fi
+
+\newlength\beamerleftmargin
+\setlength\beamerleftmargin{\Gm@lmargin}
+\newlength\beamerrightmargin
+\setlength\beamerrightmargin{\Gm@rmargin}
+
+\setbeamertemplate{title page}{
+\begin{minipage}[t][\paperheight][t]{\@UOWsmallrectangle@width-\beamerleftmargin}
+% The basic implimentation here is taken from the metropolis theme by Matthias Vogelgesang,
+% of which the author is a contributor
+% If the user has set a |titlegraphic|, we set it in a zero-height box so
+% it doesn't change the position of other elements.
+\ifx\inserttitlegraphic\@empty\else{%
+   \vbox to 0pt {
+      \vspace*{2em}
+      \usebeamercolor[fg]{titlegraphic}%
+      \inserttitlegraphic%
+   }%
+   \nointerlineskip%
+}
+\fi
+\vfill%
+% We set the title and subtitle, but only if they are defined by the user.
+% If |\subtitle| is empty, for example, it won't leave a blank space on the
+% title slide.
+\vspace*{0.12\paperheight}
+\ifx
+   \inserttitle\@empty
+\else{%
+   \raggedright%
+   \linespread{1.0}%
+   \usebeamerfont{title}%
+   \usebeamercolor[fg]{title}%
+   \ifxetex%
+      \MakeTextUppercase{\inserttitle}%
+   \else%
+      \allcaps{\inserttitle}%
+   \fi%
+  \par%
+}
+\fi
+\ifx\insertsubtitle\@empty
+\else{%
+   \usebeamerfont{subtitle}%
+   \usebeamercolor[fg]{subtitle}%
+   \insertsubtitle%
+   \par%
+   \vspace*{1em}
+}
+\fi
+%   The date and institute are set after the author, again provided they are
+%   nonempty. Note that the default date in \LaTeX{} is |\today|, not |\empty|.
+\ifx\insertdate\@empty\else{%
+   \usebeamerfont{date}%
+   \usebeamercolor[fg]{date}%
+   \insertdate%
+   \par%
+}
+\fi
+%   Like the title and subtitle, we display the author only when it is defined.
+%   But beamer's definition of |\insertauthor| is always nonempty, so we have
+%   to test another macro initialized by |\author{...}| to see if the user has
+%   defined an author. This solution was suggested by Enrico Gregorio in an
+%   answer to \href{https://tex.stackexchange.com/questions/241306/}{this
+%   Stack Exchange question}.
+\vfill
+\ifx\beamer@shortauthor\@empty\else{%
+   \usebeamerfont{author}%
+   \usebeamercolor[fg]{author}%
+   \insertauthor%
+   \par%
+   \vspace{0.25em}
+}
+\fi
+\ifx\insertinstitute\@empty\else{%
+   \usebeamerfont{institute}%
+   \usebeamercolor[fg]{institute}%
+   \insertinstitute%
+   \par%
+   \vspace*{0.25em}
+}
+\fi
+\vspace*{\@UOWlargerectangle@height}
+\end{minipage}
+}
+
+\def\maketitle{%
+   \ifbeamer@inframe
+      \titlepage
+   \else
+      \frame[plain]{\titlepage}
+   \fi
+}
+\def\titlepage{%
+   \usebeamertemplate{title page}
+}
+   
+% Blocks.
+
+% Blocks
+
+% Regular block environment
+\setbeamertemplate{block begin}{%
+  \begin{beamercolorbox}[%
+    ht=2.4ex,
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,%
+    ]{block title}
+      \usebeamerfont*{block title}%
+      \ifxetex%
+         \MakeTextUppercase{\insertblocktitle}%
+      \else%
+         \allcaps{\insertblocktitle}%
+      \fi%
+  \end{beamercolorbox}%
+  \vspace*{-1pt}
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[%
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,
+    vmode]{block body}%
+}%
+\setbeamertemplate{block end}{%
+  \end{beamercolorbox}%
+  %\vspace*{0.2ex}%
+}%
+
+% Alerted block environment
+\setbeamertemplate{block alerted begin}{%
+  \begin{beamercolorbox}[%
+    ht=2.4ex,
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,%
+    ]{block title alerted}%
+    \usebeamerfont*{block title alerted}%
+    \ifxetex%
+       \MakeTextUppercase{\insertblocktitle}%
+    \else%
+       \allcaps{\insertblocktitle}%
+    \fi%
+  \end{beamercolorbox}%
+  \vspace*{-1pt}
+  \begin{beamercolorbox}[%
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,
+    vmode]{block body alerted}%
+  }
+\setbeamertemplate{block alerted end}{%
+  \end{beamercolorbox}%
+  %\vspace*{0.2ex}%
+  }
+
+% Example block environment
+\setbeamertemplate{block example begin}{%
+  \begin{beamercolorbox}[%
+    ht=2.4ex,
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,%
+    ]{block title example}%
+    \usebeamerfont*{block title example}%
+    \ifxetex%
+       \MakeTextUppercase{\insertblocktitle}%
+    \else%
+       \allcaps{\insertblocktitle}%
+    \fi%
+  \end{beamercolorbox}%
+  \vspace*{-1pt}
+  \begin{beamercolorbox}[%
+    dp=1ex,
+    leftskip=1ex,
+    rightskip=1ex,
+    vmode]{block body example}%
+  }
+\setbeamertemplate{block example end}{%
+   \end{beamercolorbox}%
+   %\vspace*{0.2ex}%
+   }
+
+% Textblock settings
+\setlength{\parskip}{0.5em}
+\linespread{1.15}
+% Bullet point styles
+%\setbeamertemplate{itemize items}{\textbullet}
+% Captions
+\setbeamertemplate{caption label separator}{: }
+\setbeamertemplate{caption}[numbered]
+% Footnotes
+\setbeamertemplate{footnote}{%
+   \parindent 0em\noindent%
+   \raggedright
+   \scriptsize
+   \usebeamercolor{footnote}\hbox to 0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
+}
+
+\mode<all>
+>>>>>>> dev
