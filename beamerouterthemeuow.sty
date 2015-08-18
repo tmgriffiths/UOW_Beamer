@@ -29,6 +29,7 @@
 \RequirePackage{calc}
 \RequirePackage{xparse}
 \RequirePackage{etoolbox}
+\RequirePackage{anyfontsize}
 
 \newcommand{\@UOWtheme@outer@defaults}{
    \pgfkeys{/UOWtheme/outer/.cd,
@@ -146,7 +147,12 @@
          rectangle (\the\paperwidth, -\the\paperheight);
       \filldraw[color=white,]
          (0,-\the\paperheight+\@UOWsmallrectangle@height) 
-         rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
+         rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
+         [path picture={
+         \node[text=black, align=right, anchor=west] at (path picture bounding box.west) {
+         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em} PERSONALISED EXPERIENCES\kern0.1em :\kern0.1em WORLD-CLASS RESULTS}
+         };}
+         ];
       \filldraw[color=white,]
          (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
          rectangle (\the\paperwidth, -\the\paperheight)
@@ -162,7 +168,12 @@
    \begin{tikzpicture}[overlay]
       \filldraw[color=\@UOWtheme@color,]
          (0,-\the\paperheight+\@UOWsmallrectangle@height) 
-         rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight);
+         rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
+         [path picture={
+         \node[text=white, align=right, anchor=west] at (path picture bounding box.west) {
+         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em} PERSONALISED EXPERIENCES\kern0.1em :\kern0.1em WORLD-CLASS RESULTS}
+         };}
+         ];
       \filldraw[color=\@UOWtheme@color,]
          (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
          rectangle (\the\paperwidth, -\the\paperheight)
@@ -184,7 +195,15 @@
          \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
          };}
          ];
-         \draw[thick, color=UOWblack,] 
+      \filldraw[color=white,]
+         (0,-\the\paperheight+\@UOWsmallrectangle@height) 
+         rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
+         [path picture={
+         \node[text=black, align=right, anchor=west] at (path picture bounding box.west) {
+         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em} PERSONALISED EXPERIENCES\kern0.1em :\kern0.1em WORLD-CLASS RESULTS}
+         };}
+         ];
+      \draw[thick, color=UOWblack,] 
          (0,-\the\paperheight+\@UOWsmallrectangle@height) --
          (\@UOWsmallrectangle@width, -\the\paperheight+0.5*\the\@UOWlargerectangle@height) -- 
          (\@UOWsmallrectangle@width,-\the\paperheight+\the\@UOWlargerectangle@height) --
@@ -192,6 +211,7 @@
    \end{tikzpicture}
 }
 
+% Templates
 \defbeamertemplate{background}{bold}{%
    \@UOWtheme@boldbackground
 }

@@ -1,12 +1,16 @@
 \documentclass[aspectratio=1610]{beamer}
 \usepackage[scale=2.5]{ccicons}
-\usepackage{tikz}
+
+%% Not needed just for the demonstration of the available theme colours %%
+\usepackage{tikz} 
    \usetikzlibrary{matrix}
 
-\usepackage{chemmacros}
 \newcommand{\key}[1]{\texttt{\color{UOWorange}#1}} 
 \newcommand{\val}[1]{\texttt{\color{UOWblue}#1}} 
 \newcommand{\command}[1]{\texttt{\color{UOWdarkgreen}#1}} 
+%%----------------------------------------------------------------------%%
+
+\usepackage{chemmacros}
 
 \title{The Presentation Title}
 \subtitle{A nice little subtitle}
@@ -29,6 +33,51 @@ or show \textbf{bold} results.
 \end{verbatim}
 \begin{center} \textit{becomes} \end{center}
 The theme provides sensible defaults to \emph{emphasize} text, \alert{accent} parts or show \textbf{bold} results.
+\end{frame}
+
+\begin{frame}[c]
+   \frametitle{Theme Colours}
+   \begin{columns}[T]
+      \begin{column}{0.65\textwidth}
+         \scriptsize
+         \begin{tikzpicture}[ampersand replacement=\&, every node/.style={anchor=west}] 
+         \matrix (m) [row sep=0.5em, column sep=2.5em, nodes={align=left}] {%
+            \node[align=left] {\textbf{Key Value}}; \& %
+            \node[align=left] {\textbf{Colour Name}};   \& %
+            \node[align=left] {\textbf{RGB Tuple}};   
+            \& \draw [line width=0.4pt, color=UOWblack] (0,0)  circle (0.7em); \\ %
+            \node[align=left] {\val{black}};     \& \node[align=left] {UOWblack};     \& \node {0, 0, 0};      %
+            \& \fill [line width=1em, color=UOWblack] (0,0)  circle (0.7em); \\
+            \node[align=left] {\val{grey} \textit{or} \val{gray}};      \& \node[align=left] {UOWgrey};      \& \node {69, 85, 95};   %
+            \& \fill [line width=1em, color=UOWgrey] (0,0)  circle (0.7em); \\
+            \node[align=left] {\val{darkred}};   \& \node[align=left] {UOWdarkred};   \& \node {195, 18, 48};  %
+            \& \fill [line width=1em, color=UOWdarkred] (0,0)  circle (0.7em); \\
+            \node[align=left] {\val{red}};       \& \node[align=left] {UOWred};       \& \node {238, 64, 52};  %
+            \& \fill [line width=1em, color=UOWred] (0,0)  circle (0.7em); \\
+            \node[align=left] {\val{pink}};      \& \node[align=left] {UOWpink};      \& \node {238 ,0, 139};  %
+            \& \fill [line width=1em, color=UOWpink] (0,0)  circle (0.7em); \\
+            \node[align=left] {\val{orange}};    \& \node[align=left] {UOWorange};    \& \node {243, 121, 32}; %
+            \& \fill [line width=1em, color=UOWorange] (0,0)  circle (0.7em); \\
+            \node[align=left] {\val{gold} \textit{or} \val{yellow}};      \& \node[align=left] {UOWgold};      \& \node {253, 184, 19}; %
+            \& \fill [line width=1em, color=UOWgold] (0,0)  circle (0.7em); \\
+            \node[align=left] {\val{limegreen}}; \& \node[align=left] {UOWlimegreen}; \& \node {183, 198, 38}; %
+            \& \fill [line width=1em, color=UOWlimegreen] (0,0)  circle (0.7em); \\
+            \node[align=left] {\val{darkgreen} \textit{or} \val{green}}; \& \node[align=left] {UOWdarkgreen}; \& \node {0, 146, 94};   %
+            \& \fill [line width=1em, color=UOWdarkgreen] (0,0)  circle (0.7em); \\
+            \node[align=left] {\val{blue} (\textbf{default})};      \& \node[align=left] {UOWblue};      \& \node {0, 149, 214};  %
+            \& \fill [line width=1em, color=UOWblue] (0,0)  circle (0.7em); \\
+            \node[align=left] {\val{darkblue}};  \& \node[align=left] {UOWdarkblue};  \& \node {0, 83, 154};   %
+            \& \fill [line width=1em, color=UOWdarkblue] (0,0)  circle (0.7em); \\
+            \node[align=left] {\val{purple}};    \& \node[align=left] {UOWpurple};    \& \node {74, 47, 142};  %
+            \& \fill [line width=1em, color=UOWpurple] (0,0)  circle (0.7em); \\
+         };
+         \end{tikzpicture}
+      \end{column}
+      \begin{column}{0.35\textwidth}
+         \scriptsize
+         Each of the colours in the UOW colour palette has been incorporated into the UOW beamer theme. The colour of the elements in your presentation can be controlled with the \key{themecolour} (or \key{themecolor}) = \val{value} option when loading the UOW theme: \command{\textbackslash{}usetheme[\key{themecolour}=\val{value}]\{uow\}}.
+      \end{column}
+   \end{columns}
 \end{frame}
 
 \begin{frame}
