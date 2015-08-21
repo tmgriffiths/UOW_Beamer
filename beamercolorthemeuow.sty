@@ -14,7 +14,7 @@
 %% a LaTeX class for presentations. Inspiration for parts of this theme (where 
 %% design decision had to be made) and guidance on the implementation of the 
 %% pgfkeys were taken from the metropolis by Matthias Vogelgesang et al., of which 
-%% the author of this package is a direct is a contributor.
+%% the author of this package is a contributor.
 %% 
 %% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
 %% Version 1.0 2015-07-23 tmgriffiths       
@@ -40,17 +40,62 @@
    \definecolor{UOWpurple}{RGB}{74, 47, 142}
    \definecolor{UOWgrey}{RGB}{69, 85, 95}
 
+% Layouts before colours to ensure layout=eco sets to black as default
+% unless another color is chosen
+\pgfkeys{
+   /UOWtheme/color/layout/.cd,
+      .is choice,
+      plain/.code={%
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      eco/.code={%
+         \renewcommand{\@UOWtheme@color}{UOWblack}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      ecominimal/.code={%
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      minimal/.code={%
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      minimaltitle/.code={%
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      standard/.code={%
+         \@UOWtheme@color@lighttitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      boldplain/.code={%
+         \@UOWtheme@color@lighttitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      }, 
+      bold/.code={%
+         \@UOWtheme@color@lighttitle
+         \@UOWtheme@color@lightnormaltext%
+         \@UOWtheme@color@lightblock
+      },
+}
+
 \newcommand{\@UOWtheme@color}{}
 \newcommand{\@UOWtheme@alertcolor}{}
 \newcommand{\@UOWtheme@examplecolor}{}
 \pgfkeys{
    /UOWtheme/color/themecolor/.cd,
       .is choice,
-      eco/.code={%
-        \renewcommand*{\@UOWtheme@color}{UOWblack}
-        \renewcommand{\@UOWtheme@alertcolor}{UOWred}
-        \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
-      },
       black/.code={%
          \renewcommand*{\@UOWtheme@color}{UOWblack}
          \renewcommand{\@UOWtheme@alertcolor}{UOWred}
@@ -80,7 +125,7 @@
          \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
       },
       darkgreen/.code={%
-         \renewcommand*{\@UOWtheme@color}{UOWdarkgreen}
+         \renewcommand{\@UOWtheme@color}{UOWdarkgreen}
          \renewcommand{\@UOWtheme@alertcolor}{UOWred}
          \renewcommand{\@UOWtheme@examplecolor}{UOWblue}
       },
@@ -120,51 +165,6 @@
       gray/.code={%
          \pgfkeysalso{themecolor=grey}
       }
-}
-
-\pgfkeys{
-   /UOWtheme/color/layout/.cd,
-      .is choice,
-      plain/.code={%
-         \@UOWtheme@color@darktitle
-         \@UOWtheme@color@darknormaltext
-         \@UOWtheme@color@darkblock%
-      },
-      eco/.code={%
-         \@UOWtheme@color@darktitle
-         \@UOWtheme@color@darknormaltext
-         \@UOWtheme@color@darkblock%
-      },
-      ecominimal/.code={%
-         \@UOWtheme@color@darktitle
-         \@UOWtheme@color@darknormaltext
-         \@UOWtheme@color@darkblock%
-      },
-      minimal/.code={%
-         \@UOWtheme@color@darktitle
-         \@UOWtheme@color@darknormaltext
-         \@UOWtheme@color@darkblock%
-      },
-      minimaltitle/.code={%
-         \@UOWtheme@color@darktitle
-         \@UOWtheme@color@darknormaltext
-         \@UOWtheme@color@darkblock%
-      },
-      standard/.code={%
-         \@UOWtheme@color@lighttitle
-         \@UOWtheme@color@darknormaltext
-         \@UOWtheme@color@darkblock%
-      },
-      boldplain/.code={%
-         \@UOWtheme@color@lighttitle
-         \@UOWtheme@color@darknormaltext
-         \@UOWtheme@color@darkblock%
-      }, 
-      bold/.code={%
-         \@UOWtheme@color@lighttitle
-         \@UOWtheme@color@lightnormaltext%
-         \@UOWtheme@color@lightblock
-      },
 }
 
 \newcommand{\@UOWtheme@color@darknormaltext}{%

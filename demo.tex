@@ -1,5 +1,12 @@
-\documentclass[aspectratio=1610]{beamer}
+%!TEX TS-program = lualatex
+\documentclass[aspectratio=169]{beamer}
 \usepackage[scale=2.5]{ccicons}
+\usepackage{fontspec}
+   \setsansfont[%
+      Ligatures=TeX,
+      BoldFont={Flamauow Medium},%
+      BoldItalicFont={Flamauow Medium Italic},%
+      ]{Flamauow}
 
 %% Not needed just for the demonstration of the available theme colours %%
 \usepackage{tikz} 
@@ -8,9 +15,12 @@
 \newcommand{\key}[1]{\texttt{\color{UOWorange}#1}} 
 \newcommand{\val}[1]{\texttt{\color{UOWblue}#1}} 
 \newcommand{\command}[1]{\texttt{\color{UOWdarkgreen}#1}} 
+
+\usepackage{metalogo}
+\usepackage{chemmacros}
 %%----------------------------------------------------------------------%%
 
-\usepackage{chemmacros}
+\usetheme[layout=minimal]{uow}
 
 \title{The Presentation Title}
 \subtitle{A nice little subtitle}
@@ -18,28 +28,17 @@
 \institute{School of Chemistry}
 \date{}
 
-\usetheme[]{uow}
-
 \begin{document}
 
 \maketitle
 
-\begin{frame}[fragile]
-\frametitle{Typography}
-\begin{verbatim}
-The theme provides sensible defaults to 
-\emph{emphasize} text, \alert{accent} parts 
-or show \textbf{bold} results.
-\end{verbatim}
-\begin{center} \textit{becomes} \end{center}
-The theme provides sensible defaults to \emph{emphasize} text, \alert{accent} parts or show \textbf{bold} results.
-\end{frame}
+\section{General Features}
 
 \begin{frame}[c]
    \frametitle{Theme Colours}
    \begin{columns}[T]
-      \begin{column}{0.65\textwidth}
-         \scriptsize
+      \begin{column}{0.55\textwidth}
+         \tiny
          \begin{tikzpicture}[ampersand replacement=\&, every node/.style={anchor=west}] 
          \matrix (m) [row sep=0.5em, column sep=2.5em, nodes={align=left}] {%
             \node[align=left] {\textbf{Key Value}}; \& %
@@ -73,15 +72,60 @@ The theme provides sensible defaults to \emph{emphasize} text, \alert{accent} pa
          };
          \end{tikzpicture}
       \end{column}
-      \begin{column}{0.35\textwidth}
+      \begin{column}{0.45\textwidth}
          \scriptsize
          Each of the colours in the UOW colour palette has been incorporated into the UOW beamer theme. The colour of the elements in your presentation can be controlled with the \key{themecolour} (or \key{themecolor}) = \val{value} option when loading the UOW theme: \command{\textbackslash{}usetheme[\key{themecolour}=\val{value}]\{uow\}}.
       \end{column}
    \end{columns}
 \end{frame}
 
+
+\begin{frame}[fragile]
+\frametitle{Typography}
+\begin{verbatim}
+The theme provides sensible defaults to 
+\emph{emphasize} text, \alert{accent} parts 
+or show \textbf{bold} results.
+\end{verbatim}
+\begin{center} \textit{becomes} \end{center}
+The theme provides sensible defaults to \emph{emphasize} text, \alert{accent} parts or show \textbf{bold} results.
+\end{frame}
+
+
+\begin{frame}
+   Section slides are typeset for each section (\command{\textbackslash{}section\{Section Title\}}). The line underneath is a progress bar, and the progress section will be the themecolour set when loading the theme. The next slide is an example. 
+   
+   Two compilations are needed to count the number of slides to calculate the correct length of the coloured segment.
+\end{frame}
+
+
+\section{Section Slides}
+
+
+\begin{frame}[fragile]
+   \frametitle{Flama UOW with \textbackslash\texttt{fontspec\{\}}}
+   \begin{columns}
+      \begin{column}{0.5\textwidth}
+         \footnotesize
+\begin{verbatim}
+\usepackage{fontspec}
+   \setsansfont[%
+      Ligatures=TeX,
+      BoldFont={Flamauow Medium},
+      BoldItalicFont={Flamauow Medium Italic},
+      ]{Flamauow}
+\end{verbatim}
+      \end{column}
+      \begin{column}{0.45\textwidth}
+         If you are compling with \XeLaTeX{} or \LuaLaTeX{} then you have to option to load and us the Flama-UOW typefaces. The author recommends the loading the medium weight font (Flamauow Medium) as the boldface rather than the bold font, which can be a bit too heavy for legible presentations. 
+      \end{column}
+   \end{columns}
+\end{frame}
+
+
 \begin{frame}
    \frametitle{Columns, Lists and Images}
+   \framesubtitle{Coelenterazine}
    \begin{columns}
       \begin{column}{0.5\textwidth}
          \begin{enumerate}
@@ -116,6 +160,7 @@ The theme provides sensible defaults to \emph{emphasize} text, \alert{accent} pa
 \end{frame}
 
 
+\section{Beamer Specific Stuff}
 \begin{frame}
 \frametitle{Blocks}
    \begin{block}{Blocks are Used for Emphasis in Beamer}
@@ -155,6 +200,9 @@ The theme provides sensible defaults to \emph{emphasize} text, \alert{accent} pa
 \end{frame}
 
 
+\section{The Legal Stuff}
+
+
 \begin{frame}\footnotesize
    The Beamer implementation 'UOWtheme' is copyright (CC BY-NC-SA 4.0 Int) 2015 by T. M. Griffiths under the \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons Attribution-Share Alike 4.0 International License}\footnote{\url{http://creativecommons.org/licenses/by-nc-sa/4.0/}}.
    
@@ -163,4 +211,6 @@ The theme provides sensible defaults to \emph{emphasize} text, \alert{accent} pa
    The crest and associated branding of the University of Wollongong is copyright and the property of the University of Wollongong. As the core identifier of the university its use is governed by the university's brand and visual identity guidelines which can be found \href{http://www.uow.edu.au/about/brand/uowlogo/index.html}{online}\footnote{\url{http://www.uow.edu.au/about/brand/uowlogo/index.html}}.
    
 \end{frame}
+
+
 \end{document}
