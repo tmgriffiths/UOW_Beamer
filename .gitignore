@@ -11,6 +11,7 @@
 ## Intermediate documents:
 *.dvi
 *-converted-to.*
+
 # these rules might exclude image files for figures etc.
 # *.ps
 # *.eps
@@ -30,7 +31,7 @@
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
-*.lb
+.*.lb
 
 ## Auxiliary and intermediate files from other packages:
 

@@ -16,9 +16,10 @@ Beamer dimensions (cm) for all slides (just using ppt 16:9 for calculation)
 logo = 3.8/25.4*16 = 2.39370078740157480304 cm 2.39
 logo = 1.13/14.3*9 = 0.71118881118881118873 cm 0.71
 
-Detect ratio option given to the document class
 
-% See answer to http://tex.stackexchange.com/questions/123106/detect-aspect-ratio-in-beamer
+Detect ratio option given to the document class
+See answer to http://tex.stackexchange.com/questions/123106/detect-aspect-ratio-in-beamer
+
 \RequirePackage{xparse}
 \ExplSyntaxOn
 \NewDocumentCommand{\ifaspectratio}{mmm}

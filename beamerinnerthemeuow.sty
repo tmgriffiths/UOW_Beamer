@@ -152,7 +152,7 @@
 % question}. ---See mtheme.
 %
 % Also, the \ifxetex statements need to be outside the \patchcmd. Odd - Tom 
-% (TODO Incorportate into metropolis theme. Letterspacing corrections.)
+% (TODO Incorportate into metropolis theme (tmgriffiths letterspacing corrections fork)
 
 \ifxetex
    \patchcmd{\sectionentry}
@@ -180,137 +180,137 @@
 
 % Section titlepage slides
 \newcommand{\@UOW@sectionpage@none}{
-  \AtBeginSection{
-    % intenionally empty
-  }
+   \AtBeginSection{
+      % intenionally empty
+   }
 }
 
 \defbeamertemplate{section page}{progressbar}{
-  \centering
-  \begin{minipage}{0.6\paperwidth}
-    \usebeamercolor[fg]{section title}
-    \usebeamerfont{section title}
-    \insertsectionhead\\[-1ex]%
-    \usebeamertemplate*{progress bar in section page}
-  \end{minipage}
-  \par
+   \centering
+   \begin{minipage}{0.66\paperwidth}
+      \usebeamercolor[fg]{section title}%
+      \usebeamerfont{section title}%
+      \insertsectionhead\\[-0.66em]%
+      \usebeamertemplate*{progress bar in section page}\\%
+   \end{minipage}
+   \par
 }
 
 % If \section{} is given inside a \frame{}, cool. If not, put it in one.
 \newcommand{\@UOW@sectionpage@progressbar}{
-  \setbeamertemplate{section page}[progressbar]
-  \AtBeginSection{
-    \ifbeamer@inframe
-      \sectionpage
-    \else
-      \frame[plain,c]{\sectionpage}
-    \fi
-  }
+   \setbeamertemplate{section page}[progressbar]
+   \AtBeginSection{
+      \ifbeamer@inframe
+         \sectionpage
+      \else
+         \frame[plain,c]{\sectionpage}
+      \fi
+   }
 }
 
 \newlength{\@UOW@progressonsectionpage}
 \setbeamertemplate{progress bar in section page}{
-  \setlength{\@UOW@progressonsectionpage}{%
-    \textwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
-  }%
-  \begin{tikzpicture}
-    \filldraw[color=UOWgrey!25,] (0,0) rectangle (\textwidth, 1pt);
-    \filldraw[color=\@UOWtheme@color,] (0,0) rectangle (\@UOW@progressonsectionpage, 1pt);
-  \end{tikzpicture}%
+   \setlength{\@UOW@progressonsectionpage}{%
+      \textwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+   }%
+   \begin{tikzpicture}
+      \filldraw[color=UOWgrey!25,] (0,0) rectangle (\textwidth, 1pt);
+      \filldraw[color=\@UOWtheme@color,] (0,0) rectangle (\@UOW@progressonsectionpage, 1pt);
+   \end{tikzpicture}%
 }
 
 % Blocks.
 
 % Regular block environment
 \setbeamertemplate{block begin}{%
-  \begin{beamercolorbox}[%
-    ht=2.4ex,
-    dp=1ex,
-    leftskip=1ex,
-    rightskip=1ex,%
-    ]{block title}
+   \begin{beamercolorbox}[%
+      ht=2.4ex,
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,%
+      ]{block title}
       \usebeamerfont*{block title}%
       \ifxetex%
          \MakeTextUppercase{\insertblocktitle}%
       \else%
          \allcaps{\insertblocktitle}%
       \fi%
-  \end{beamercolorbox}%
-  \vspace*{-1pt}
-  \usebeamerfont{block body}%
-  \begin{beamercolorbox}[%
-    dp=1ex,
-    leftskip=1ex,
-    rightskip=1ex,
-    vmode]{block body}%
+   \end{beamercolorbox}%
+   \vspace*{-1pt}
+   \usebeamerfont{block body}%
+   \begin{beamercolorbox}[%
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,
+      vmode]{block body}%
 }%
 \setbeamertemplate{block end}{%
-  \end{beamercolorbox}%
-  %\vspace*{0.2ex}%
+   \end{beamercolorbox}%
 }%
 
 % Alerted block environment
 \setbeamertemplate{block alerted begin}{%
-  \begin{beamercolorbox}[%
-    ht=2.4ex,
-    dp=1ex,
-    leftskip=1ex,
-    rightskip=1ex,%
-    ]{block title alerted}%
-    \usebeamerfont*{block title alerted}%
-    \ifxetex%
-       \MakeTextUppercase{\insertblocktitle}%
-    \else%
-       \allcaps{\insertblocktitle}%
-    \fi%
-  \end{beamercolorbox}%
-  \vspace*{-1pt}
-  \begin{beamercolorbox}[%
-    dp=1ex,
-    leftskip=1ex,
-    rightskip=1ex,
-    vmode]{block body alerted}%
-  }
+   \begin{beamercolorbox}[%
+      ht=2.4ex,
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,%
+      ]{block title alerted}%
+      \usebeamerfont*{block title alerted}%
+      \ifxetex%
+         \MakeTextUppercase{\insertblocktitle}%
+      \else%
+         \allcaps{\insertblocktitle}%
+      \fi%
+   \end{beamercolorbox}%
+   \vspace*{-1pt}
+   \begin{beamercolorbox}[%
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,
+      vmode]{block body alerted}%
+   }
 \setbeamertemplate{block alerted end}{%
-  \end{beamercolorbox}%
-  %\vspace*{0.2ex}%
-  }
+   \end{beamercolorbox}%
+   }
 
 % Example block environment
 \setbeamertemplate{block example begin}{%
-  \begin{beamercolorbox}[%
-    ht=2.4ex,
-    dp=1ex,
-    leftskip=1ex,
-    rightskip=1ex,%
-    ]{block title example}%
-    \usebeamerfont*{block title example}%
-    \ifxetex%
-       \MakeTextUppercase{\insertblocktitle}%
-    \else%
-       \allcaps{\insertblocktitle}%
-    \fi%
-  \end{beamercolorbox}%
-  \vspace*{-1pt}
-  \begin{beamercolorbox}[%
-    dp=1ex,
-    leftskip=1ex,
-    rightskip=1ex,
-    vmode]{block body example}%
-  }
+   \begin{beamercolorbox}[%
+      ht=2.4ex,
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,%
+      ]{block title example}%
+      \usebeamerfont*{block title example}%
+      \ifxetex%
+         \MakeTextUppercase{\insertblocktitle}%
+      \else%
+         \allcaps{\insertblocktitle}%
+      \fi%
+   \end{beamercolorbox}%
+   \vspace*{-1pt}
+   \begin{beamercolorbox}[%
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,
+      vmode]{block body example}%
+   }
 \setbeamertemplate{block example end}{%
    \end{beamercolorbox}%
-   %\vspace*{0.2ex}%
    }
 
 % Textblock settings
 \setlength{\parskip}{0.5em}
 \linespread{1.15}
+
 % Bullet point styles
-%\setbeamertemplate{itemize items}{\textbullet}
+\setbeamertemplate{itemize items}{\textbullet}
+
 % Captions
 \setbeamertemplate{caption label separator}{: }
 \setbeamertemplate{caption}[numbered]
+
 % Footnotes
 \setbeamertemplate{footnote}{%
    \parindent 0em\noindent%
@@ -318,7 +318,7 @@
    \scriptsize
    \usebeamercolor{footnote}\hbox to 0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
 }
-\addtobeamertemplate{footnote}{\advance\hsize-0.5cm}{\vspace{6pt}}
+\addtobeamertemplate{footnote}{\advance\hsize-1.5cm}{\vspace{6pt}}
 
 \@UOWtheme@inner@defaults
 
