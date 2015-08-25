@@ -1,5 +1,5 @@
 %% This is file `beamerinnerthemeuow.sty',
-%% 2014-01-07 (cc) tmgriffiths Version 1.0
+%% 2014-01-07 (cc) tmgriffiths Version 1.1
 %%
 %% Copyright (CC BY-NC-SA 4.0 Int) 2015 by T. M. Griffiths
 %% under the creative commons licence, attribution, non-comercial, share alike
@@ -17,7 +17,8 @@
 %% the author of this package is a contributor.
 %% 
 %% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
-%% Version 1.0 2015-07-23 tmgriffiths       
+%% Version 1.0 2015-07-23 tmgriffiths
+%% Version 1.1 2015-08-25 tmgriffiths       
 %%--------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
@@ -40,15 +41,21 @@
 \setlength\beamerrightmargin{\Gm@rmargin}
 
 \pgfkeys{
-  /UOWtheme/inner/sectionpage/.cd,
+  /UOWtheme/inner/sectionslide/.cd,
     .is choice,
-    none/.code=\@UOW@sectionpage@none,
-    progressbar/.code=\@UOW@sectionpage@progressbar,
+    none/.code=\@UOW@sectionslide@none,
+    false/.code={%
+       \pgfkeysalso{sectionslide=none}
+    },
+    progressbar/.code=\@UOW@sectionslide@progressbar,
+    true/.code={%
+       \pgfkeysalso{sectionslide=progressbar}
+    },
 }
 
 \newcommand{\@UOWtheme@inner@defaults}{
    \pgfkeys{/UOWtheme/inner/.cd,
-      sectionpage=progressbar,
+      sectionslide=progressbar,
    }
 }
 
@@ -157,29 +164,29 @@
 \ifxetex
    \patchcmd{\sectionentry}
       {\def\insertsectionhead{#2}}
-      {\def\insertsectionhead{\MakeTextUppercase{#2}}}
+      {\def\insertsectionhead{\raggedright\MakeTextUppercase{#2}}}
       {}
       {\PackageError{beamerinnerthememetropolis}{Patching section title failed.}}
    \patchcmd{\beamer@section}
       {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
-      {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{\MakeTextUppercase{#1}}}}
+      {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{\raggedright\MakeTextUppercase{#1}}}}
       {}
       {\PackageError{beamerinnerthememetropolis}{Patching section title failed.}}
 \else
    \patchcmd{\sectionentry}
       {\def\insertsectionhead{#2}}
-      {\def\insertsectionhead{\allcaps{#2}}}
+      {\def\insertsectionhead{\raggedright\allcaps{#2}}}
       {}
       {\PackageError{beamerinnerthememetropolis}{Patching section title failed.}}
    \patchcmd{\beamer@section}
       {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
-      {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{\allcaps{#1}}}}
+      {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{\raggedright\allcaps{#1}}}}
       {}
       {\PackageError{beamerinnerthememetropolis}{Patching section title failed.}}
 \fi
 
 % Section titlepage slides
-\newcommand{\@UOW@sectionpage@none}{
+\newcommand{\@UOW@sectionslide@none}{
    \AtBeginSection{
       % intenionally empty
    }
@@ -191,31 +198,31 @@
       \usebeamercolor[fg]{section title}%
       \usebeamerfont{section title}%
       \insertsectionhead\\[-0.66em]%
-      \usebeamertemplate*{progress bar in section page}\\%
+      \usebeamertemplate*{progress bar in section page}%
    \end{minipage}
    \par
 }
 
 % If \section{} is given inside a \frame{}, cool. If not, put it in one.
-\newcommand{\@UOW@sectionpage@progressbar}{
+\newcommand{\@UOW@sectionslide@progressbar}{
    \setbeamertemplate{section page}[progressbar]
    \AtBeginSection{
       \ifbeamer@inframe
-         \sectionpage
+         \sectionpage\vspace*{0.66em}
       \else
          \frame[plain,c]{\sectionpage}
       \fi
    }
 }
 
-\newlength{\@UOW@progressonsectionpage}
+\newlength{\@UOW@progressonsectionslide}
 \setbeamertemplate{progress bar in section page}{
-   \setlength{\@UOW@progressonsectionpage}{%
+   \setlength{\@UOW@progressonsectionslide}{%
       \textwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
    }%
    \begin{tikzpicture}
       \filldraw[color=UOWgrey!25,] (0,0) rectangle (\textwidth, 1pt);
-      \filldraw[color=\@UOWtheme@color,] (0,0) rectangle (\@UOW@progressonsectionpage, 1pt);
+      \filldraw[color=\@UOWtheme@color,] (0,0) rectangle (\@UOW@progressonsectionslide, 1pt);
    \end{tikzpicture}%
 }
 

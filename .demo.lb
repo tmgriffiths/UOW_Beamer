@@ -1,7 +1,7 @@
 (dp0
 Vengine
 p1
-S'pdflatex'
+Vlualatex
 p2
 sVpackages
 p3

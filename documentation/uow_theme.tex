@@ -1,20 +1,21 @@
 %!TEX TS-program = lualatex
 \RequirePackage{etex}
-\documentclass[a4paper,oneside,12pt]{article}
+\documentclass[a4paper,oneside,11pt]{article}
 \usepackage{fontspec}
    % http://tex.stackexchange.com/questions/132873/microtype-tracking-disables-small-caps-in-lualatex
    \defaultfontfeatures{SmallCapsFeatures={Renderer=Basic},}
    % Serif
-   \setmainfont[%
-      %Numbers=OldStyle,%
-      Renderer=Basic%
-      ]
-      {Minion Pro}
+   %\setmainfont[%
+   %   Renderer=Basic%
+   %   ]
+   %   {Arno Pro}
 
-   \setsansfont[%
-      Renderer=Basic%
-      ]      
-      {TeX Gyre Heros}
+   \setmainfont[%
+      Ligatures=TeX,%
+      BoldFont={Flamauow Medium},%
+      BoldItalicFont={Flamauow Medium Italic},%
+      ItalicFont={Flamauow Book Italic},%
+      ]{Flamauow}
       
 \usepackage[protrusion=true, tracking=true]{microtype}
       
@@ -30,7 +31,7 @@
 
 \usepackage{tikz}
 \usepackage{parskip}
-\usepackage[scale=2.0]{ccicons}
+\usepackage[scale=1.5]{ccicons}
 \usepackage{xcolor}
    % Use the UOW colour pallet
    \definecolor{UOWblack}{RGB}{0, 0, 0}
@@ -74,14 +75,14 @@
 
 \title{\textsf{The UOW Beamer Theme}}
 \author{Thomas M. Griffiths}
-\date{Released \today, Version 1.0}
+\date{Released \today, Version 1.1}
 
 \begin{document}
 
 \maketitle
 
 \section{About}
-This theme ports the UOW Power Point templates over to Beamer, a \LaTeX class for presentations. The template has been set up so that the layout for the entire presentation is selected and the slides are formatted as appropriate, individual slides cannot be themed at this stage. See section \ref{sec:options} for examples. Each layout can be coloured with the UOW Branding colours, which are available also for the user to use as colours for objects in their presentation. The entire theme consists of eight files in total: five files, a demo and two logos. 
+This theme ports the UOW Power Point templates over to Beamer, a \LaTeX{} class for presentations. The template has been set up so that the layout for the entire presentation is selected and the slides are formatted as appropriate, individual slides cannot be themed at this stage. See section \ref{sec:options} for examples. Each layout can be coloured with the UOW Branding colours, which are available also for the user to use as colours for objects in their presentation. The entire theme consists of eight files in total: five files, a demo and two logos. 
 \begin{multicols}{2}
 \begin{itemize}
    \item \texttt{\colorbox{UOWgrey!20}{beamerthemeuow.sty}},
@@ -105,52 +106,13 @@ To use the theme in your presentation simply place the files in the working dire
 
 Note, that the \command{\key{key}=\val{value}} entries are optional. For an explanation of each \key{key} and \val{value} see section \ref{sec:options}. The defaults values for the theme are \key{themecolor}=\val{blue}, \key{layout}=\val{standard} and \key{framenumbering}=\val{none}; these are what will be loaded if no options are specified with \command{\textbackslash{}usetheme\{uow\}}. 
 
-All the standard options for a beamer class; aspect ratio, fontsize etc. are still available. To get the two slide ratios offered by the UOW Power Point theme use the following options for the \emph{document class}: \key{aspectratio}=\val{43} for a 4:3 aspect ratio, and \key{aspectratio}=\val{169} for a 16:9 aspect ratio. For a example presentation compile \texttt{demo.tex}.
+All the standard options for a beamer class; aspect ratio, fontsize etc. are still available. To get the two slide ratios offered by the UOW Power Point theme use the following options for the \emph{document class}: \key{aspectratio}=\val{43} for a 4:3 aspect ratio, and \key{aspectratio}=\val{169} for a 16:9 aspect ratio. For aN example presentation compile \texttt{demo.tex}.
 
 This theme is currently \emph{not} distributed via CTAN. It is only available via download from UOW, or you may download, clone or fork the repository on \href{https://github.com/tmgriffiths/UOW_Beamer}{Github}\footnote{\url{https://github.com/tmgriffiths/UOW_Beamer}}. Distribution by CTAN may be implemented in the future.
 
 \section{Package Options}\label{sec:options}
-\subsubsection*{\key{layout}}%
-In the Microsoft Power point implementation there are three main frame styles. One with solid colour for the background of the slide and a thin white polygon at the base containing the UOW brandmark. A style that is the inverse of this, a white background with coloured polygon. And a third eco style with a white background and an just the outline of the polygon at the base of the slide.
 
-While individual slides can't be themed at this stage there are eight layouts included in this theme. These eight options should encompass most sensible arrangements of slides, these options are shown below with the default blue colour.
-
-If your presentation won't have a title page you can turn the different layout for the first page with the \key{titlepage}=\val{false} or \val{none}. The default is \val{true}.
-
-\subsubsection*{\val{standard} default}% \hfill \textbf{default} \\[0.5em]
-\fbox{\includegraphics[width=0.5\textwidth]{titleframe_standard.png}}
-\fbox{\includegraphics[width=0.5\textwidth]{contentframe_standard.png}}\par
-
-\subsubsection*{\val{minimaltitle}}% \\[0.5em]
-\fbox{\includegraphics[width=0.5\textwidth]{titleframe_minimal.png}}
-\fbox{\includegraphics[width=0.5\textwidth]{contentframe_standard.png}}\par
-
-\subsubsection*{\val{minimal}}% \\[0.5em]
-\fbox{\includegraphics[width=0.5\textwidth]{titleframe_minimal.png}}
-\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
-
-\subsubsection*{\val{bold}}% \\[0.5em]
-\fbox{\includegraphics[width=0.5\textwidth]{titleframe_standard.png}}
-\fbox{\includegraphics[width=0.5\textwidth]{contentframe_bold.png}}\par
-
-\subsubsection*{\val{boldplain}}% \\[0.5em]
-\fbox{\includegraphics[width=0.5\textwidth]{titleframe_standard.png}}
-\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
-
-\subsubsection*{\val{eco}}% \\[0.5em]
-\fbox{\includegraphics[width=0.5\textwidth]{titleframe_eco.png}}
-\fbox{\includegraphics[width=0.5\textwidth]{contentframe_eco.png}}\par
-
-\subsubsection*{\val{ecominimal}}% \\[0.5em]
-\fbox{\includegraphics[width=0.5\textwidth]{titleframe_eco.png}}
-\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
-
-\subsubsection*{\val{plain}}% \\[0.5em]
-\fbox{\includegraphics[width=0.5\textwidth]{titleframe_plain.png}}
-\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
-
-
-\subsubsection*{\key{themecolor} \textit{or} \key{themecolour}}
+\subsubsection*{\key{themecolor} or \key{themecolour}}
 Each of the colours outlined in the UOW brand identity guideline are available as colours for the presentation. The key themecolor (or themecolour) sets the colour of the polygons and elements in the UOW theme. These colours can be used in the document to colour any element by calling the colour, for example as an argument to \command{\textbackslash{}color\{UOWred\}}, by prefixing the name of the key with `UOW', e.g. UOWblue.
 
 \begin{tikzpicture}[ampersand replacement=\&, every node/.style={anchor=west}] 
@@ -187,8 +149,61 @@ Each of the colours outlined in the UOW brand identity guideline are available a
 \end{tikzpicture}
 
 
-\subsubsection*{\key{framnetitlenumbering}}
-You can turn on numbering of the slides with this key. The numbers are placed in the bottom right corner of the slides. It does not make much sense to use this option with the \val{standard}, \val{bold}, \val{minimaltitle} and \val{eco} layouts. I may patch this at a later date to place the slide numbers in a different location in these cases, such as the top right corner. For now it is up to the operators discretion to use this option appropriately.
+\subsubsection*{\key{layout}}%
+In the Microsoft Power point implementation there are three main frame styles. One with a solid colour for the background of the slide and a thin white polygon at the base containing the UOW brandmark. A style that is the inverse of this, a white background with coloured polygon. And a third eco style with a white background and an just the outline of the polygon at the base of the slide. Individual slides can't be themed at this stage. Instead there are eight logical\footnote{Well, seemingly logical layouts in the authors mind.} layouts included in this theme. These options should encompass most sensible arrangements of slides. Each of the options are shown below with the default blue colour.
+
+If you don't have a title page you can turn off the different layout for the first slide with the \key{titlepage}=\val{false} or \val{none}, the default is \val{true}. When you turn off the title page all slides will then look like the second of the two images below.
+
+\subsubsection*{\val{standard} default}% \hfill \textbf{default} \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_standard.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_standard.png}}\par
+
+\subsubsection*{\val{minimaltitle}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_minimal.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_standard.png}}\par
+
+\subsubsection*{\val{minimal}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_minimal.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
+
+\subsubsection*{\val{bold}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_standard.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_bold.png}}\par
+
+\subsubsection*{\val{boldplain}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_standard.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
+
+\subsubsection*{\val{eco}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_eco.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_eco.png}}\par
+
+\subsubsection*{\val{ecominimal}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_eco.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
+
+\subsubsection*{\val{plain}}% \\[0.5em]
+\fbox{\includegraphics[width=0.5\textwidth]{titleframe_plain.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{contentframe_plain.png}}\par
+
+
+\subsubsection*{\key{titlepage}}
+As explained above, this turns the different background for the first slide on or off depending whether or not you're going to use a title page slide. The options are \val{true} (default), \val{false} and \val{none}. Each option is fairly self explanatory.
+
+
+\subsubsection*{\key{sectionslide}}
+\fbox{\includegraphics[width=0.5\textwidth]{sectionframe_plain.png}}
+\fbox{\includegraphics[width=0.5\textwidth]{sectionframe_extra.png}}\par
+
+\subsubsection*{\val{progressbar} or \val{true} default}
+Section slides are typeset for each \command{\textbackslash{}section\{\}}. The section macro can be given inside or outside of a frame environment. If \command{\textbackslash{}section\{\}} is given outside a frame environment then a standalone slide is typeset (above left). Calling the \command{\textbackslash{}section\{\}} inside a frame environment allows you to place other material on the slide, e.g. a summary or mini table of contents (above right). The line under the section title is a progress bar. The coloured bar on the left will be the \key{themecolor} of the current presentation, and is proportional to the amount of the presentation that has passed to that point.
+
+\subsubsection*{\val{none} or \val{false}}
+No \command{\textbackslash{}section\{\}}'s will be typeset. If you have sections in you presentation you don't need to remove them if you use this option, they simply won't be typeset. Stand-alone slides will be removed and any \command{\textbackslash{}section\{\}}'s inside frames won't be typeset. Any extra content inside a frame along with a \command{\textbackslash{}section\{\}}'s command will still be visible when using this option.
+
+
+\subsubsection*{\key{framenumbering}}
+You can turn on numbering of the slides with this key. The numbers are placed in the bottom right corner of the slides. It does not make much sense to use this option with the \val{standard}, \val{bold}, \val{minimaltitle} and \val{eco} layouts. I may patch this at a later date to place the slide numbers in a different location in these cases, such as the top right corner. For now it is up to the users discretion to use this appropriately.
 
 \subsubsection*{\val{counter}}
 A plain arabic numeral in the bottom right corner of the slide to show the slide number.
@@ -198,10 +213,6 @@ A fraction of the page number and the total number of slides separated by a soli
 
 \subsubsection*{\val{none} default}
 No page numbering. This is the default option.
-
-
-\subsubsection*{\key{titlepage}}
-This turns the different background for the first slide on or off depending weather or not you're going to use a title page slide. The options are \val{true}, \val{false} and \val{none}. Each option is fairly self explanatory.
 
 
 \section{Legal}
@@ -216,7 +227,11 @@ This work is copyright (CC BY-NC-SA 4.0 International Licence) 2015 by T. M. Gri
 
 \section{Change Log}
 If you spot any errors or bugs, or alternately you have any requests for an addition let me know.
-\subsection*{Version 1.0, 2015–07–23, tmgriffiths}
+
+\subsubsection*{Version 1.1, 2015-08-25, tmgriffiths}
+Added sectionslide key and section slides.
+
+\subsubsection*{Version 1.0, 2015–07–23, tmgriffiths}
 It's day dot. Nothing to added or removed. It just is.
 
 \end{document}
