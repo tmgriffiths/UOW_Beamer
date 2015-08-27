@@ -73,6 +73,14 @@
 \cs_generate_variant:Nn \str_case:nnn { V }
 \ExplSyntaxOff
 
+% Define tagline
+% Default text
+\def\@UOWtheme@tagline{PERSONALISED EXPERIENCES\kern0.1em :\kern0.1em WORLD-CLASS RESULTS}
+% Command
+\newcommand{\tagline}[1]{%
+   \gdef\@UOWtheme@tagline{#1}%
+}
+
 % Lengths
 \newlength{\@UOWlargerectangle@height}
 \newlength{\@UOWlargerectangle@width}
@@ -151,7 +159,7 @@
          rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
          [path picture={
          \node[text=black, align=right, anchor=west] at (path picture bounding box.west) {
-         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em} PERSONALISED EXPERIENCES\kern0.1em :\kern0.1em WORLD-CLASS RESULTS}
+         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em}\@UOWtheme@tagline}
          };}
          ];
       \filldraw[color=white,]
@@ -172,7 +180,7 @@
          rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
          [path picture={
          \node[text=white, align=right, anchor=west] at (path picture bounding box.west) {
-         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em} PERSONALISED EXPERIENCES\kern0.1em :\kern0.1em WORLD-CLASS RESULTS}
+         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em}\@UOWtheme@tagline}
          };}
          ];
       \filldraw[color=\@UOWtheme@color,]
@@ -201,7 +209,7 @@
          rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
          [path picture={
          \node[text=black, align=right, anchor=west] at (path picture bounding box.west) {
-         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em} PERSONALISED EXPERIENCES\kern0.1em :\kern0.1em WORLD-CLASS RESULTS}
+         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em}\@UOWtheme@tagline}
          };}
          ];
       \draw[thick, color=\@UOWtheme@color,] 
