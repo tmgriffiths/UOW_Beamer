@@ -343,41 +343,71 @@
    /UOWtheme/outer/layout/.cd,
       .is choice,
       minimal/.code={%
-         \setbeamertemplate{background}[minimal]%
+         \BeforeBeginEnvironment{frame}{%
+            \setbeamertemplate{background}[minimal]%
+         }%
       },
       minimaltitle/.code={%
-         \setbeamertemplate{background}[minimal title]%
+         \BeforeBeginEnvironment{frame}{%
+            \setbeamertemplate{background}[minimal title]%
+         }%
          \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
             \advance\footheight by 1.2\@UOWsmallrectangle@height
             }{}{}
       },
       standard/.code={%
-         \setbeamertemplate{background}[UOWdefault]% default already defined by beamer
+         \BeforeBeginEnvironment{frame}{%
+            \setbeamertemplate{background}[UOWdefault]% default already defined by beamer
+         }%
          \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
             \advance\footheight by 1.2\@UOWsmallrectangle@height
             }{}{}
       },
       bold/.code={%
-         \setbeamertemplate{background}[bold]%
+         \BeforeBeginEnvironment{frame}{%
+            \setbeamertemplate{background}[bold]%
+         }%
          \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
             \advance\footheight by 1.2\@UOWsmallrectangle@height
             }{}{}
       },
       boldplain/.code={%
-         \setbeamertemplate{background}[bold plain]%
+         \BeforeBeginEnvironment{frame}{%
+            \setbeamertemplate{background}[bold plain]%
+         }%
       },
       eco/.code={%
-         \setbeamertemplate{background}[eco]%
+         \BeforeBeginEnvironment{frame}{%
+            \setbeamertemplate{background}[eco]%
+         }%
          \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
             \advance\footheight by 1.2\@UOWsmallrectangle@height
             }{}{}
       },
       ecominimal/.code={%
-         \setbeamertemplate{background}[ecominimal]%
+         \BeforeBeginEnvironment{frame}{%
+            \setbeamertemplate{background}[ecominimal]%
+         }%
       },
       plain/.code={%
-         \setbeamertemplate{background}[UOWplain]%
+         \BeforeBeginEnvironment{frame}{%
+            \setbeamertemplate{background}[UOWplain]%
+         }%
       },
+}
+
+% Individual slide theme keys
+\define@key{beamerframe}{boldslide}[true]{%
+  \setbeamertemplate{background}[bold]%
+}
+\define@key{beamerframe}{standardslide}[true]{%
+  \setbeamertemplate{background}[minimal title]%
+}
+\define@key{beamerframe}{ecoslide}[true]{%
+  \setbeamertemplate{background}[eco]%
+}
+\define@key{beamerframe}{plain}[true]{%
+  \setbeamertemplate{background}[plain]%
 }
 
 % No navigation symbols in the bottom corner
