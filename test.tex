@@ -1,0 +1,21 @@
+%\documentclass[aspectratio=1610]{beamer}
+\documentclass[aspectratio=169]{beamer}
+%\documentclass[aspectratio=149]{beamer}
+%\documentclass[aspectratio=54]{beamer}
+%\documentclass[aspectratio=43]{beamer}
+%\documentclass[aspectratio=32]{beamer}
+
+\usetheme[titlepage=false,layout=bold]{uow}
+
+\begin{document}
+
+\begin{frame}
+   \pic{UOW_mono.pdf}
+   \begin{itemize}
+      \item Height: \the\ht\mybox
+      \item Width: \the\wd\mybox
+      \item Depth: \the\dp\mybox % For images usually 0 except if rotated 
+   \end{itemize}
+\end{frame}
+
+\end{document}

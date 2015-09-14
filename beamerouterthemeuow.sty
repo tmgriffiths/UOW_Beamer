@@ -18,7 +18,7 @@
 %% 
 %% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
 %% Version 1.0 2015-07-23 tmgriffiths
-%% Version 1.1 2015-08-25 tmgriffiths       
+%% Version 1.1 2015-08-25 tmgriffiths
 %%--------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
@@ -87,49 +87,55 @@
 \newlength{\@UOWsmallrectangle@height}
 \newlength{\@UOWsmallrectangle@width}
 \newlength{\@UOWlogo@width}
+
+% Dimensions of larger rectangle. Basis for other dimensions.
 \xifaspectratio{
    {1610}{% HEIGHT = [169]/10*9 | Width = [169]/16*16
-   \setlength{\@UOWlargerectangle@height}{0.1125\paperheight}
-   \setlength{\@UOWlargerectangle@width}{0.189\paperwidth}
-   \setlength{\@UOWsmallrectangle@height}{0.054\paperheight}
-   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.189\paperwidth}
-   \setlength{\@UOWlogo@width}{0.149606\paperwidth}   
-   }
-   {169}{% ORIGINALS AND CALCULATED FROM PPT
-   \setlength{\@UOWlargerectangle@height}{0.125\paperheight}
-   \setlength{\@UOWlargerectangle@width}{0.189\paperwidth}
-   \setlength{\@UOWsmallrectangle@height}{0.06\paperheight}
-   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.189\paperwidth}
-   \setlength{\@UOWlogo@width}{0.149606\paperwidth}
-   }
-   {149}{% HEIGHT = [169]/9*9 | Width = [169]/14*16
-   \setlength{\@UOWlargerectangle@height}{0.125\paperheight}
+   \setlength{\@UOWlargerectangle@height}{0.126\paperheight}
    \setlength{\@UOWlargerectangle@width}{0.216\paperwidth}
-   \setlength{\@UOWsmallrectangle@height}{0.06\paperheight}
-   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.216\paperwidth}
-   \setlength{\@UOWlogo@width}{0.171\paperwidth}
+   }
+   {169}{% ORIGINALS AND CALCULATED FROM PPT. All other ratios stem from here.
+   \setlength{\@UOWlargerectangle@height}{0.140\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.216\paperwidth}
+   }   
+   {149}{% HEIGHT = [169]/9*9 | Width = [169]/14*16
+   \setlength{\@UOWlargerectangle@height}{0.140\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.247\paperwidth}
    }
    {54}{% HEIGHT = [169]/10*9 | Width = [169]/12.50*16
-   \setlength{\@UOWlargerectangle@height}{0.113\paperheight}
-   \setlength{\@UOWlargerectangle@width}{0.242\paperwidth}
-   \setlength{\@UOWsmallrectangle@height}{0.054\paperheight}
-   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.242\paperwidth}
-   \setlength{\@UOWlogo@width}{0.192\paperwidth}
+   \setlength{\@UOWlargerectangle@height}{0.126\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.276\paperwidth}
    }
    {43}{% HEIGHT = [169]/9.60*9 | Width = [169]/12.80*16
-   \setlength{\@UOWlargerectangle@height}{0.117\paperheight}
-   \setlength{\@UOWlargerectangle@width}{0.236\paperwidth}
-   \setlength{\@UOWsmallrectangle@height}{0.056\paperheight}
-   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.236\paperwidth}
-   \setlength{\@UOWlogo@width}{0.187\paperwidth}
+   \setlength{\@UOWlargerectangle@height}{0.131\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.270\paperwidth}
    }
    {32}{% HEIGHT = [169]/9*9 | Width = [169]/13.5*16
-   \setlength{\@UOWlargerectangle@height}{0.125\paperheight}
-   \setlength{\@UOWlargerectangle@width}{0.224\paperwidth}
-   \setlength{\@UOWsmallrectangle@height}{0.06\paperheight}
-   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.224\paperwidth}
-   \setlength{\@UOWlogo@width}{0.177\paperwidth}
+   \setlength{\@UOWlargerectangle@height}{0.140\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.256\paperwidth}
    }
+}
+
+% Other dimensions set from the 'master' dimensions of \@UOWlargerectangle@length/width
+\setlength{\@UOWsmallrectangle@height}{0.5\@UOWlargerectangle@height}%0.48
+\setlength{\@UOWsmallrectangle@width}{\paperwidth-\@UOWlargerectangle@width}
+\setlength{\@UOWlogo@width}{0.864\@UOWlargerectangle@width}%0.792
+
+% Measure the height and width of the custom brandmark
+% See Martin Scharrer's answer to this
+% http://tex.stackexchange.com/questions/53497/how-do-i-get-the-exact-dimension-of-a-picture-in-latex
+\newsavebox\mybox
+
+\newcommand{\pic}[1]{%
+   \sbox\mybox{\includegraphics{#1}}%
+%   Height: \the\ht\mybox
+%   Width: \the\wd\mybox
+%   Depth: \the\dp\mybox % For images usually 0 except if rotated 
+%   \ifdim\wd\mybox>0.5\paperwidth
+%     % width is larger than 60% of the text width ...
+%   \fi
+   % Insert the image:
+   \usebox\mybox
 }
 
 % Boolean for turning title page on and off.
@@ -159,7 +165,7 @@
          rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
          [path picture={
          \node[text=black, align=right, anchor=west] at (path picture bounding box.west) {
-         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em}\@UOWtheme@tagline}
+         {\sffamily\fontsize{6}{8}\selectfont\hspace{1em}\@UOWtheme@tagline}
          };}
          ];
       \filldraw[color=white,]
@@ -180,7 +186,7 @@
          rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
          [path picture={
          \node[text=white, align=right, anchor=west] at (path picture bounding box.west) {
-         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em}\@UOWtheme@tagline}
+         {\sffamily\fontsize{6}{8}\selectfont\hspace{1em}\@UOWtheme@tagline}
          };}
          ];
       \filldraw[color=\@UOWtheme@color,]
@@ -209,7 +215,7 @@
          rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
          [path picture={
          \node[text=black, align=right, anchor=west] at (path picture bounding box.west) {
-         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em}\@UOWtheme@tagline}
+         {\sffamily\fontsize{6}{8}\selectfont\hspace{1em}\@UOWtheme@tagline}
          };}
          ];
       \draw[thick, color=\@UOWtheme@color,] 
