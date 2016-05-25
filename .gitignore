@@ -32,6 +32,7 @@
 *.synctex.gz(busy)
 *.pdfsync
 *.lb
+*.lb
 
 ## Auxiliary and intermediate files from other packages:
 
